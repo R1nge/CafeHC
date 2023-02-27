@@ -11,10 +11,18 @@ namespace DI
         public override void InstallBindings()
         {
             var joystickInstance = Container.InstantiatePrefabForComponent<FloatingJoystick>(floatingJoystick);
-            joystickInstance.transform.SetParent(parent);
-            joystickInstance.transform.localPosition = Vector3.zero;
+            Setup(joystickInstance);
             Container.Bind<FloatingJoystick>().FromInstance(joystickInstance).AsSingle();
             Container.QueueForInject(floatingJoystick);
+        }
+
+        private void Setup(FloatingJoystick joystickInstance)
+        {
+            joystickInstance.transform.SetParent(parent);
+            joystickInstance.transform.localPosition = Vector3.zero;
+            var rect = joystickInstance.GetComponent<RectTransform>();
+            rect.offsetMin = Vector2.zero;
+            rect.offsetMax = Vector2.zero;
         }
     }
 }

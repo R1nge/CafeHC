@@ -11,9 +11,8 @@ namespace DI
         public override void InstallBindings()
         {
             var playerInstance = Container.InstantiatePrefabForComponent<Player.Player>(player);
-            playerInstance.transform.SetParent(spawnPoint);
-            playerInstance.transform.localPosition = Vector3.zero;
-            Container.Bind<GameObject>().FromInstance(playerInstance.gameObject).AsSingle().NonLazy();
+            playerInstance.transform.position = spawnPoint.position;
+            Container.Bind<Player.Player>().FromInstance(playerInstance).AsSingle();
             Container.QueueForInject(player);
         }
     }

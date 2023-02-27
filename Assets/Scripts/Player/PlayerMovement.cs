@@ -29,7 +29,7 @@ namespace Player
             if (_floatingJoystick.Horizontal != 0 || _floatingJoystick.Vertical != 0)
             {
                 Rotate();
-                //Play anim
+                //TODO: Play anim
             }
 
             _rigidbody.MovePosition(_rigidbody.position + _movementDirection);
