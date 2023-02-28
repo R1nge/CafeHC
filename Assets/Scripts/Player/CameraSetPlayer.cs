@@ -9,6 +9,6 @@ namespace Player
         [SerializeField] private CinemachineVirtualCamera vCamera;
 
         [Inject]
-        public void Constructor(Player player) => vCamera.Follow = player.transform;
+        public void Construct(Player player) => vCamera.Follow = player.transform;
     }
 }
