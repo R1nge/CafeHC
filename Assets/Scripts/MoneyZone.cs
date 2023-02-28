@@ -34,7 +34,7 @@ public class MoneyZone : MonoBehaviour
     private IEnumerator OnTriggerEnter(Collider other)
     {
         if (_currentShownAmount == 0) yield break;
-        if (other.TryGetComponent(out Player.Player player))
+        if (other.TryGetComponent(out Player.Player _))
         {
             for (int i = _currentShownAmount - 1; i >= 0; i--)
             {
@@ -43,6 +43,14 @@ public class MoneyZone : MonoBehaviour
                 yield return new WaitForSeconds(0.01f);
                 _currentShownAmount--;
             }
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.TryGetComponent(out Player.Player _))
+        {
+            StopAllCoroutines();
         }
     }
 }
