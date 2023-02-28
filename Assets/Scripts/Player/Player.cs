@@ -9,29 +9,42 @@ namespace Player
     {
         [SerializeField] private Transform hand;
         private Inventory _inventory;
-        private Spawner _spawner;
+        private CoffeeFactory _coffeeFactory;
 
         [Inject]
-        public void Construct(Inventory inventory) => _inventory = inventory;
+        public void Construct(Inventory inventory, CoffeeFactory coffeeFactory)
+        {
+            _inventory = inventory;
+            _coffeeFactory = coffeeFactory;
+        }
 
         //BUG: NEVER SUBSCRIBE IN "CONSTRUCTOR", LOST 5 HOURS BECAUSE OF IT
         private void Start()
         {
-            _spawner = FindObjectOfType<Spawner>();
             _inventory.OnItemAddedEvent += OnItemAdded;
             _inventory.OnItemRemovedEvent += OnItemRemoved;
             _inventory.OnAllItemsRemovedEvent += OnAllItemsRemoved;
         }
 
-        private void OnItemAdded(InventoryItem item) => _spawner.Spawn(hand);
+        private void OnItemAdded(InventoryItem item)
+        {
+            _coffeeFactory.GetFromPool(
+                hand.position,
+                Quaternion.identity,
+                hand
+            );
+        }
 
-        private void OnItemRemoved(InventoryItem item) => Destroy(hand.GetChild(hand.childCount - 1).gameObject);
+        private void OnItemRemoved(InventoryItem item)
+        {
+            _coffeeFactory.ReturnToPool(hand.GetChild(hand.childCount - 1).gameObject);
+        }
 
         private void OnAllItemsRemoved()
         {
             for (int i = hand.childCount - 1; i >= 0; i--)
             {
-                Destroy(hand.GetChild(i).gameObject);
+                _coffeeFactory.ReturnToPool(hand.GetChild(i).gameObject);
             }
         }
 

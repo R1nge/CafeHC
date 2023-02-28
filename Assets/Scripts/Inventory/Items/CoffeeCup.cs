@@ -7,21 +7,27 @@ public class CoffeeCup : MonoBehaviour, IPickupable, ITrashable
 {
     [SerializeField] private InventoryItem item;
     private Inventory _inventory;
+    private CoffeeFactory _coffeeFactory;
 
     [Inject]
-    public void Construct(Inventory inventory) => _inventory = inventory;
+    public void Construct(Inventory inventory, CoffeeFactory coffeeFactory)
+    {
+        _inventory = inventory;
+        _coffeeFactory = coffeeFactory;
+    }
+    //OR can use gameobject.setActive(false);
 
     public void Pickup()
     {
         if (_inventory.TryAddItem(item))
         {
-            Destroy(gameObject);
+            _coffeeFactory.ReturnToPool(gameObject);
         }
     }
 
     public void Trash()
     {
         _inventory.RemoveItem(item);
-        Destroy(gameObject);
+        _coffeeFactory.ReturnToPool(gameObject);
     }
 }

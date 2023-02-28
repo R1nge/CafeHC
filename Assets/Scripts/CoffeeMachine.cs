@@ -9,12 +9,16 @@ public class CoffeeMachine : MonoBehaviour
     [SerializeField] private Transform spawnPoint;
     [SerializeField] private int maxCount;
     private int _currentCount;
-    private DiContainer _diContainer;
+    private CoffeeFactory _coffeeFactory;
 
     [Inject]
-    public void Construct(DiContainer diContainer) => _diContainer = diContainer;
+    public void Construct(CoffeeFactory coffeeFactory) => _coffeeFactory = coffeeFactory;
 
-    private void Start() => StartCoroutine(Spawn_c());
+    private void Start()
+    {
+        _coffeeFactory.CreatePool(coffee, 50);
+        StartCoroutine(Spawn_c());
+    }
 
     private IEnumerator Spawn_c()
     {
@@ -24,7 +28,7 @@ public class CoffeeMachine : MonoBehaviour
             yield return new WaitForSeconds(delay);
             if (_currentCount < maxCount)
             {
-                _diContainer.InstantiatePrefab(coffee, spawnPoint.position, Quaternion.identity, spawnPoint);
+                _coffeeFactory.GetFromPool(spawnPoint.position, Quaternion.identity, spawnPoint);
             }
         }
     }

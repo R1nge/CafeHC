@@ -3,7 +3,6 @@ using System.Collections.Generic;
 
 public class Inventory
 {
-    //TODO: make customizable, maybe using public method or scriptable object
     private int _maxAmount = 5;
     private int _currentAmount;
     private List<InventoryItem> _items = new();
@@ -11,6 +10,7 @@ public class Inventory
     public event Action<InventoryItem> OnItemAddedEvent;
     public event Action<InventoryItem> OnItemRemovedEvent;
     public event Action OnAllItemsRemovedEvent;
+    public event Action<int> OnMaxAmountChangedEvent;
 
     public bool TryAddItem(InventoryItem item)
     {
@@ -18,7 +18,7 @@ public class Inventory
         {
             _items[i].GetItemName();
         }
-        
+
         if (CanAddItem())
         {
             _items.Add(item);
@@ -44,5 +44,11 @@ public class Inventory
         _currentAmount = 0;
         _items.Clear();
         OnAllItemsRemovedEvent?.Invoke();
+    }
+
+    public void SetMaxAmount(int maxAmount)
+    {
+        _maxAmount = maxAmount;
+        OnMaxAmountChangedEvent?.Invoke(_maxAmount);
     }
 }
