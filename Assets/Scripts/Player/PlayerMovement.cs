@@ -39,8 +39,10 @@ namespace Player
         {
             var direction =
                 Vector3.RotateTowards(
-                    transform.forward, _movementDirection,
-                    rotationSpeed * Time.deltaTime, 0
+                    transform.forward, 
+                    _movementDirection,
+                    rotationSpeed * Time.deltaTime, 
+                    0
                 );
 
             transform.rotation = Quaternion.LookRotation(direction);
