@@ -24,7 +24,7 @@ public class CoffeeMachine : MonoBehaviour
             yield return new WaitForSeconds(delay);
             if (_currentCount < maxCount)
             {
-                _diContainer.InstantiatePrefab(coffee, spawnPoint.position, Quaternion.identity, null);
+                _diContainer.InstantiatePrefab(coffee, spawnPoint.position, Quaternion.identity, spawnPoint);
             }
         }
     }

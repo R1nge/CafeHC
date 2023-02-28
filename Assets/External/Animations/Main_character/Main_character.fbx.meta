@@ -3,7 +3,12 @@ guid: a10cb0adef5b6c346886c375efe0cd51
 ModelImporter:
   serializedVersion: 21300
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: maincolor
+    second: {fileID: 3758952881610933197, guid: d574d2f510dff6b4298d8308ebafa633, type: 3}
   materials:
     materialImportMode: 2
     materialName: 0
@@ -16,8 +21,7 @@ ModelImporter:
     optimizeGameObjects: 0
     removeConstantScaleCurves: 1
     motionNodeName: 
-    rigImportErrors: "Avatar creation failed:\n\tParent for 'HRUpgradeArea' differs
-      from one found in HumanDescription. 'HRUpgradeArea' was found instead of 'HRUpgradeAreaOpenArea'.\n"
+    rigImportErrors: 
     rigImportWarnings: 
     animationImportErrors: 
     animationImportWarnings: 

@@ -9,17 +9,21 @@ namespace Player
     {
         [SerializeField] private Transform hand;
         private Inventory _inventory;
+        private Spawner _spawner;
 
         [Inject]
-        public void Construct(Inventory inventory)
+        public void Construct(Inventory inventory) => _inventory = inventory;
+
+        //BUG: NEVER SUBSCRIBE IN "CONSTRUCTOR", LOST 5 HOURS BECAUSE OF IT
+        private void Start()
         {
-            _inventory = inventory;
+            _spawner = FindObjectOfType<Spawner>();
             _inventory.OnItemAddedEvent += OnItemAdded;
             _inventory.OnItemRemovedEvent += OnItemRemoved;
             _inventory.OnAllItemsRemovedEvent += OnAllItemsRemoved;
         }
 
-        private void OnItemAdded(InventoryItem item) => Instantiate(item.GetModel(), hand);
+        private void OnItemAdded(InventoryItem item) => _spawner.Spawn(hand);
 
         private void OnItemRemoved(InventoryItem item) => Destroy(hand.GetChild(hand.childCount - 1).gameObject);
 

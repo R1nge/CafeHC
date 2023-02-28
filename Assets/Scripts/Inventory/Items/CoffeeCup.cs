@@ -5,7 +5,7 @@ using Zenject;
 
 public class CoffeeCup : MonoBehaviour, IPickupable, ITrashable
 {
-    [SerializeField] private InventoryItem inventoryItem = new();
+    [SerializeField] private InventoryItem item;
     private Inventory _inventory;
 
     [Inject]
@@ -13,13 +13,15 @@ public class CoffeeCup : MonoBehaviour, IPickupable, ITrashable
 
     public void Pickup()
     {
-        _inventory.AddItem(inventoryItem);
-        Destroy(gameObject);
+        if (_inventory.TryAddItem(item))
+        {
+            Destroy(gameObject);
+        }
     }
 
     public void Trash()
     {
-        _inventory.RemoveItem(inventoryItem);
+        _inventory.RemoveItem(item);
         Destroy(gameObject);
     }
 }

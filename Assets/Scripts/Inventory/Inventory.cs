@@ -1,47 +1,48 @@
 ﻿using System;
 using System.Collections.Generic;
-using UnityEngine;
 
 public class Inventory
 {
-    private readonly List<InventoryItem> _items = new();
+    //TODO: make customizable, maybe using public method or scriptable object
+    private int _maxAmount = 5;
+    private int _currentAmount;
+    private List<InventoryItem> _items = new();
 
     public event Action<InventoryItem> OnItemAddedEvent;
     public event Action<InventoryItem> OnItemRemovedEvent;
     public event Action OnAllItemsRemovedEvent;
 
-    public void AddItem(InventoryItem item)
+    public bool TryAddItem(InventoryItem item)
     {
-        _items.Add(item);
-        OnItemAddedEvent?.Invoke(item);
-        LogItems();
+        for (int i = 0; i < _items.Count; i++)
+        {
+            _items[i].GetItemName();
+        }
+        
+        if (CanAddItem())
+        {
+            _items.Add(item);
+            _currentAmount = _items.Count;
+            OnItemAddedEvent?.Invoke(item);
+            return true;
+        }
+
+        return false;
     }
+
+    private bool CanAddItem() => _currentAmount < _maxAmount;
 
     public void RemoveItem(InventoryItem item)
     {
         _items.Remove(item);
+        _currentAmount = _items.Count;
         OnItemRemovedEvent?.Invoke(item);
-        LogItems();
     }
 
     public void RemoveAllItems()
     {
+        _currentAmount = 0;
         _items.Clear();
         OnAllItemsRemovedEvent?.Invoke();
-        LogItems();
-    }
-
-    private void LogItems()
-    {
-        if (_items.Count == 0)
-        {
-            Debug.Log("No Items");
-            return;
-        }
-
-        for (int i = 0; i < _items.Count; i++)
-        {
-            Debug.Log(_items[i].GetItemName());
-        }
     }
 }
