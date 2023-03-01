@@ -13,20 +13,23 @@ public abstract class Inventory : MonoBehaviour
     public event Action OnAllItemsRemovedEvent;
     public event Action<int> OnMaxAmountChangedEvent;
 
-    public InventoryItem TakeItem()
+    public InventoryItem GetItem()
     {
         if (_items.Count == 0) return null;
         var _item = _items[^1];
-        RemoveItem(_items[^1]);
         return _item;
     }
 
     public bool TryTransferTo(Inventory inventory)
     {
-        var item = TakeItem();
+        var item = GetItem();
         if (inventory.CanAddItem(item))
         {
-            inventory.TryAddItem(item);
+            if (inventory.TryAddItem(item))
+            {
+                RemoveItem(_items[^1]);
+            }
+
             return true;
         }
 

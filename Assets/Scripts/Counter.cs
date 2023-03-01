@@ -32,12 +32,18 @@ public class Counter : MonoBehaviour
 
     private void Add(PlayerInventory playerInventory)
     {
-        playerInventory.TryTransferTo(_inventory);
+        for (int i = 0; i < 5; i++)
+        {
+            playerInventory.TryTransferTo(_inventory);
+        }
     }
 
     private void Give(CustomerInventory customerInventory)
     {
-        _inventory.TryTransferTo(customerInventory);
+        for (int i = 0; i < _currentCount; i++)
+        {
+            _inventory.TryTransferTo(customerInventory);
+        }
     }
 
     private void Spawn(InventoryItem item)
