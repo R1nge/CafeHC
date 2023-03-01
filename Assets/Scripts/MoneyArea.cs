@@ -2,7 +2,7 @@
 using UnityEngine;
 using Zenject;
 
-public class MoneyZone : MonoBehaviour
+public class MoneyArea : MonoBehaviour
 {
     [SerializeField] private int moneyPerBanknote;
     [SerializeField] private GameObject[] banknotes;

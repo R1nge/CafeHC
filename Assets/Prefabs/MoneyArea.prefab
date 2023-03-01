@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 8034798836298600144}
   - component: {fileID: 8034798836298600147}
   m_Layer: 6
-  m_Name: MoneyZone
+  m_Name: MoneyArea
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

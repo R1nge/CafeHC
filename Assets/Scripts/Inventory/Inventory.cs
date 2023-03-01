@@ -2,37 +2,31 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Inventory : MonoBehaviour
+public abstract class Inventory : MonoBehaviour
 {
     [SerializeField] private int maxAmount = 5;
     private int _currentAmount;
-    private List<InventoryItem> _items = new();
+    private readonly List<InventoryItem> _items = new();
 
     public event Action<InventoryItem> OnItemAddedEvent;
     public event Action<InventoryItem> OnItemRemovedEvent;
     public event Action OnAllItemsRemovedEvent;
     public event Action<int> OnMaxAmountChangedEvent;
 
-    public InventoryItem TakeItem(InventoryItem item)
+    public InventoryItem TakeItem()
     {
-        for (int i = _items.Count - 1; i >= 0; i--)
-        {
-            if (_items[i].GetItemName() == item.GetItemName())
-            {
-                var _item = _items[i];
-                RemoveItem(_items[i]);
-                return _item;
-            }
-        }
-
-        return null;
+        if (_items.Count == 0) return null;
+        var _item = _items[^1];
+        RemoveItem(_items[^1]);
+        return _item;
     }
 
-    public bool TryTransferTo(InventoryItem item, Inventory inventory)
+    public bool TryTransferTo(Inventory inventory)
     {
-        if (item == null) return false;
-        if (inventory.TryAddItem(item))
+        var item = TakeItem();
+        if (inventory.CanAddItem(item))
         {
+            inventory.TryAddItem(item);
             return true;
         }
 
@@ -41,7 +35,7 @@ public class Inventory : MonoBehaviour
 
     public bool TryAddItem(InventoryItem item)
     {
-        if (CanAddItem())
+        if (CanAddItem(item))
         {
             _items.Add(item);
             _currentAmount = _items.Count;
@@ -52,7 +46,11 @@ public class Inventory : MonoBehaviour
         return false;
     }
 
-    private bool CanAddItem() => _currentAmount < maxAmount;
+    private bool CanAddItem(InventoryItem item)
+    {
+        if (item == null) return false;
+        return _currentAmount < maxAmount;
+    }
 
     public void RemoveItem(InventoryItem item)
     {
