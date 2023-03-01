@@ -2,7 +2,7 @@
 using UnityEngine;
 
 [Serializable]
-public struct InventoryItem
+public class InventoryItem
 {
     [SerializeField] private string itemName;
     [SerializeField] private GameObject model;

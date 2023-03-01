@@ -17,7 +17,7 @@ public class CoffeeMachine : MonoBehaviour
     private void Start()
     {
         //TODO: Find optimal pool size
-        _coffeeFactory.CreatePool(coffee, 10);
+        _coffeeFactory.CreatePool(coffee, 30);
         StartCoroutine(Spawn_c());
     }
 

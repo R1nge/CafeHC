@@ -2,16 +2,48 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[Serializable]
 public class Inventory
 {
-    private int _maxAmount = 5;
+    [SerializeField] private int maxAmount = 5;
     private int _currentAmount;
     private List<InventoryItem> _items = new();
+
+    //for correct Zenject binding
+    public Inventory() { }
+
+    public Inventory(int maxAmount) => this.maxAmount = maxAmount;
 
     public event Action<InventoryItem> OnItemAddedEvent;
     public event Action<InventoryItem> OnItemRemovedEvent;
     public event Action OnAllItemsRemovedEvent;
     public event Action<int> OnMaxAmountChangedEvent;
+
+    public InventoryItem TakeItem(InventoryItem item)
+    {
+        for (int i = _items.Count - 1; i >= 0; i--)
+        {
+            if (_items[i].GetItemName() == item.GetItemName())
+            {
+                var _item = _items[i];
+                RemoveItem(_items[i]);
+                return _item;
+            }
+        }
+
+        return null;
+    }
+
+    public bool TryTransferTo(InventoryItem item, Inventory inventory)
+    {
+        if (item == null) return false;
+        if (inventory.TryAddItem(item))
+        {
+            return true;
+        }
+
+        return false;
+    }
 
     public bool TryAddItem(InventoryItem item)
     {
@@ -20,21 +52,19 @@ public class Inventory
             _items.Add(item);
             _currentAmount = _items.Count;
             OnItemAddedEvent?.Invoke(item);
-            LogItems();
             return true;
         }
 
         return false;
     }
 
-    private bool CanAddItem() => _currentAmount < _maxAmount;
+    private bool CanAddItem() => _currentAmount < maxAmount;
 
     public void RemoveItem(InventoryItem item)
     {
         _items.Remove(item);
         _currentAmount = _items.Count;
         OnItemRemovedEvent?.Invoke(item);
-        LogItems();
     }
 
     public void RemoveAllItems()
@@ -46,16 +76,7 @@ public class Inventory
 
     public void SetMaxAmount(int maxAmount)
     {
-        _maxAmount = maxAmount;
-        OnMaxAmountChangedEvent?.Invoke(_maxAmount);
-    }
-
-    private void LogItems()
-    {
-        Debug.Log("/////////////////////");
-        for (int i = 0; i < _items.Count; i++)
-        {
-            Debug.Log(_items[i].GetItemName());
-        }
+        this.maxAmount = maxAmount;
+        OnMaxAmountChangedEvent?.Invoke(this.maxAmount);
     }
 }

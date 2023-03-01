@@ -93,8 +93,8 @@ public class GenericFactory<T> : MonoBehaviour where T : MonoBehaviour
             }
 
             var _transform = _pool[i].transform;
-            _transform.SetPositionAndRotation(pos, rot);
             _transform.SetParent(parent);
+            _transform.SetPositionAndRotation(pos, rot);
             _pool[i].gameObject.SetActive(true);
             return _pool[i];
         }
