@@ -1,5 +1,4 @@
-﻿using System;
-using Pickupable;
+﻿using Pickupable;
 using UnityEngine;
 using Zenject;
 
@@ -12,15 +11,11 @@ namespace Player
         private CoffeeFactory _coffeeFactory;
 
         [Inject]
-        public void Construct(Inventory inventory, CoffeeFactory coffeeFactory)
-        {
-            _inventory = inventory;
-            _coffeeFactory = coffeeFactory;
-        }
-
-        //BUG: NEVER SUBSCRIBE IN "CONSTRUCTOR", LOST 5 HOURS BECAUSE OF IT
+        public void Construct(CoffeeFactory coffeeFactory) => _coffeeFactory = coffeeFactory;
+        
         private void Start()
         {
+            _inventory = GetComponent<Inventory>();
             _inventory.OnItemAddedEvent += OnItemAdded;
             _inventory.OnItemRemovedEvent += OnItemRemoved;
             _inventory.OnAllItemsRemovedEvent += OnAllItemsRemoved;
@@ -52,7 +47,7 @@ namespace Player
         {
             if (other.TryGetComponent(out IPickupable pickupable))
             {
-                pickupable.Pickup();
+                pickupable.Pickup(_inventory);
             }
         }
 

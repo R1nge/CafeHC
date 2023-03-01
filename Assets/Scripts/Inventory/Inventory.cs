@@ -2,17 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[Serializable]
-public class Inventory
+public class Inventory : MonoBehaviour
 {
     [SerializeField] private int maxAmount = 5;
     private int _currentAmount;
     private List<InventoryItem> _items = new();
-
-    //for correct Zenject binding
-    public Inventory() { }
-
-    public Inventory(int maxAmount) => this.maxAmount = maxAmount;
 
     public event Action<InventoryItem> OnItemAddedEvent;
     public event Action<InventoryItem> OnItemRemovedEvent;

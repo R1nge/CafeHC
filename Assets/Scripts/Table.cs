@@ -4,19 +4,17 @@ using Zenject;
 public class Table : MonoBehaviour
 {
     [SerializeField] private InventoryItem item;
-    [SerializeField] private Inventory inventory;
-    private Inventory _playerInventory;
+    private Inventory _inventory;
     private CoffeeFactory _coffeeFactory;
     private int _currentCount;
 
     [Inject]
-    public void Construct(Inventory _inventory, CoffeeFactory coffeeFactory)
-    {
-        _playerInventory = _inventory;
-        _coffeeFactory = coffeeFactory;
-    }
+    public void Construct(CoffeeFactory coffeeFactory) => _coffeeFactory = coffeeFactory;
 
-    private void Start() => inventory.OnAllItemsRemovedEvent += OnAllItemsRemoved;
+    private void Start()
+    {
+        _inventory = GetComponent<Inventory>();
+    }
 
     private void OnAllItemsRemoved()
     {
@@ -25,19 +23,20 @@ public class Table : MonoBehaviour
             _coffeeFactory.ReturnToPool(transform.GetChild(i).gameObject);
         }
     }
-
+    
     private void OnTriggerEnter(Collider other)
     {
-        if (other.TryGetComponent(out Player.Player player))
+        if (other.TryGetComponent(out Inventory otherInventory))
         {
             if (_currentCount >= 5)
             {
-                inventory.RemoveAllItems();
+                _inventory.RemoveAllItems();
+                OnAllItemsRemoved();
                 _currentCount = 0;
                 return;
             }
 
-            if (_playerInventory.TryTransferTo(_playerInventory.TakeItem(item), inventory))
+            if (otherInventory.TryTransferTo(otherInventory.TakeItem(item), _inventory))
             {
                 var pos = new Vector3(
                     transform.position.x,
@@ -50,6 +49,4 @@ public class Table : MonoBehaviour
             }
         }
     }
-
-    private void OnDestroy() => inventory.OnAllItemsRemovedEvent -= OnAllItemsRemoved;
 }

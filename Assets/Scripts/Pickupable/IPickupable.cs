@@ -2,6 +2,6 @@
 {
     public interface IPickupable
     {
-        void Pickup();
+        void Pickup(Inventory inventory);
     }
 }
