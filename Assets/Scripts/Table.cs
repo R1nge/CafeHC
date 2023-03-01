@@ -11,10 +11,7 @@ public class Table : MonoBehaviour
     [Inject]
     public void Construct(CoffeeFactory coffeeFactory) => _coffeeFactory = coffeeFactory;
 
-    private void Start()
-    {
-        _inventory = GetComponent<Inventory>();
-    }
+    private void Awake() => _inventory = GetComponent<Inventory>();
 
     private void OnAllItemsRemoved()
     {

@@ -13,7 +13,7 @@ namespace Player
         [Inject]
         public void Construct(CoffeeFactory coffeeFactory) => _coffeeFactory = coffeeFactory;
         
-        private void Start()
+        private void Awake()
         {
             _inventory = GetComponent<Inventory>();
             _inventory.OnItemAddedEvent += OnItemAdded;

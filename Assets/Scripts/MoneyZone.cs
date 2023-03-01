@@ -12,7 +12,7 @@ public class MoneyZone : MonoBehaviour
     [Inject]
     private void Construct(Wallet wallet) => _wallet = wallet;
 
-    private void Start()
+    private void Awake()
     {
         _currentShownAmount = banknotes.Length;
         Show();
