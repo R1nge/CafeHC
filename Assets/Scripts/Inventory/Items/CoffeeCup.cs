@@ -15,7 +15,6 @@ public class CoffeeCup : MonoBehaviour, IPickupable, ITrashable
         _inventory = inventory;
         _coffeeFactory = coffeeFactory;
     }
-    //OR can use gameobject.setActive(false);
 
     public void Pickup()
     {

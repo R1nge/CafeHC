@@ -1,3 +1,3 @@
-﻿public class CoffeeFactory : GenericFactory
+﻿public class CoffeeFactory : GenericFactory<CoffeeCup>
 {
 }

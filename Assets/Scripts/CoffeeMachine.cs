@@ -4,7 +4,7 @@ using Zenject;
 
 public class CoffeeMachine : MonoBehaviour
 {
-    [SerializeField] private GameObject coffee;
+    [SerializeField] private CoffeeCup coffee;
     [SerializeField] private float delay;
     [SerializeField] private Transform spawnPoint;
     [SerializeField] private int maxCount;
@@ -16,7 +16,8 @@ public class CoffeeMachine : MonoBehaviour
 
     private void Start()
     {
-        _coffeeFactory.CreatePool(coffee, 50);
+        //TODO: Find optimal pool size
+        _coffeeFactory.CreatePool(coffee, 10);
         StartCoroutine(Spawn_c());
     }
 
@@ -28,6 +29,7 @@ public class CoffeeMachine : MonoBehaviour
             yield return new WaitForSeconds(delay);
             if (_currentCount < maxCount)
             {
+                //TODO: spawn in different positions
                 _coffeeFactory.GetFromPool(spawnPoint.position, Quaternion.identity, spawnPoint);
             }
         }

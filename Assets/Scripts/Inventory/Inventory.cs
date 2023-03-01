@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using UnityEngine;
 
 public class Inventory
 {
@@ -14,16 +15,12 @@ public class Inventory
 
     public bool TryAddItem(InventoryItem item)
     {
-        for (int i = 0; i < _items.Count; i++)
-        {
-            _items[i].GetItemName();
-        }
-
         if (CanAddItem())
         {
             _items.Add(item);
             _currentAmount = _items.Count;
             OnItemAddedEvent?.Invoke(item);
+            LogItems();
             return true;
         }
 
@@ -37,6 +34,7 @@ public class Inventory
         _items.Remove(item);
         _currentAmount = _items.Count;
         OnItemRemovedEvent?.Invoke(item);
+        LogItems();
     }
 
     public void RemoveAllItems()
@@ -50,5 +48,14 @@ public class Inventory
     {
         _maxAmount = maxAmount;
         OnMaxAmountChangedEvent?.Invoke(_maxAmount);
+    }
+
+    private void LogItems()
+    {
+        Debug.Log("/////////////////////");
+        for (int i = 0; i < _items.Count; i++)
+        {
+            Debug.Log(_items[i].GetItemName());
+        }
     }
 }
