@@ -55,7 +55,6 @@ public class Table : MonoBehaviour
     {
         _coffeeFactory.ReturnToPool(transform.GetChild(transform.childCount - 1).gameObject);
         _currentCount--;
-        _eatenCount++;
         moneyArea.AddMoney(Random.Range(5, 10));
     }
 
