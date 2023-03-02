@@ -1,4 +1,5 @@
-﻿using Pickupable;
+﻿using System;
+using Pickupable;
 using UnityEngine;
 using Zenject;
 
@@ -9,10 +10,15 @@ namespace Player
         [SerializeField] private Transform hand;
         private Inventory _inventory;
         private CoffeeFactory _coffeeFactory;
+        private GarbageFactory _garbageFactory;
 
         [Inject]
-        public void Construct(CoffeeFactory coffeeFactory) => _coffeeFactory = coffeeFactory;
-        
+        private void Construct(CoffeeFactory coffeeFactory, GarbageFactory garbageFactory)
+        {
+            _coffeeFactory = coffeeFactory;
+            _garbageFactory = garbageFactory;
+        }
+
         private void Awake()
         {
             _inventory = GetComponent<Inventory>();
@@ -23,16 +29,33 @@ namespace Player
 
         private void OnItemAdded(InventoryItem item)
         {
-            _coffeeFactory.GetFromPool(
-                hand.position,
-                Quaternion.identity,
-                hand
-            );
+            //TODO: think of a better solution
+            switch (item.GetItemType())
+            {
+                case InventoryItem.ItemType.CoffeeCup:
+                    _coffeeFactory.GetFromPool(hand.position, Quaternion.identity, hand);
+                    break;
+                case InventoryItem.ItemType.Garbage:
+                    _garbageFactory.GetFromPool(hand.position, Quaternion.identity, hand);
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
         }
 
         private void OnItemRemoved(InventoryItem item)
         {
-            _coffeeFactory.ReturnToPool(hand.GetChild(hand.childCount - 1).gameObject);
+            switch (item.GetItemType())
+            {
+                case InventoryItem.ItemType.CoffeeCup:
+                    _coffeeFactory.ReturnToPool(hand.GetChild(hand.childCount - 1).gameObject);
+                    break;
+                case InventoryItem.ItemType.Garbage:
+                    _garbageFactory.ReturnToPool(hand.GetChild(hand.childCount - 1).gameObject);
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
         }
 
         private void OnAllItemsRemoved()

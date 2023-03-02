@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Zenject;
 
-public class GenericFactory<T> : MonoBehaviour where T : MonoBehaviour
+public class Factory<T> : MonoBehaviour where T : MonoBehaviour 
 {
     private List<T> _pool;
     private DiContainer _diContainer;

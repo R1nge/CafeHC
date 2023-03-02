@@ -5,7 +5,6 @@ using UnityEngine;
 public abstract class Inventory : MonoBehaviour
 {
     [SerializeField] private int maxAmount = 5;
-    private int _currentAmount;
     private readonly List<InventoryItem> _items = new();
 
     public event Action<InventoryItem> OnItemAddedEvent;
@@ -13,11 +12,12 @@ public abstract class Inventory : MonoBehaviour
     public event Action OnAllItemsRemovedEvent;
     public event Action<int> OnMaxAmountChangedEvent;
 
+    public int GetCount() => _items.Count;
+
     public InventoryItem GetItem()
     {
         if (_items.Count == 0) return null;
-        var _item = _items[^1];
-        return _item;
+        return _items[^1];
     }
 
     public bool TryTransferTo(Inventory inventory)
@@ -41,7 +41,6 @@ public abstract class Inventory : MonoBehaviour
         if (CanAddItem(item))
         {
             _items.Add(item);
-            _currentAmount = _items.Count;
             OnItemAddedEvent?.Invoke(item);
             return true;
         }
@@ -52,19 +51,21 @@ public abstract class Inventory : MonoBehaviour
     private bool CanAddItem(InventoryItem item)
     {
         if (item == null) return false;
-        return _currentAmount < maxAmount;
+        if (_items.Count != 0)
+        {
+            if (_items[0].GetItemType() != item.GetItemType()) return false;
+        }
+        return _items.Count < maxAmount;
     }
 
     public void RemoveItem(InventoryItem item)
     {
         _items.Remove(item);
-        _currentAmount = _items.Count;
         OnItemRemovedEvent?.Invoke(item);
     }
 
     public void RemoveAllItems()
     {
-        _currentAmount = 0;
         _items.Clear();
         OnAllItemsRemovedEvent?.Invoke();
     }

@@ -12,10 +12,20 @@ public class MoneyArea : MonoBehaviour
     [Inject]
     private void Construct(Wallet wallet) => _wallet = wallet;
 
+    public void AddMoney(int amount)
+    {
+        _currentShownAmount += amount;
+        Show();
+    }
+
     private void Awake()
     {
         _currentShownAmount = banknotes.Length;
-        Show();
+
+        for (int i = _currentShownAmount - 1; i >= 0; i--)
+        {
+            Hide(i);
+        }
     }
 
     private void Show()
@@ -27,7 +37,11 @@ public class MoneyArea : MonoBehaviour
         }
     }
 
-    private void Hide(int index) => banknotes[index].SetActive(false);
+    private void Hide(int index)
+    {
+        banknotes[index].SetActive(false);
+        _currentShownAmount--;
+    }
 
     private void Earn() => _wallet.Earn(moneyPerBanknote);
 
@@ -36,12 +50,11 @@ public class MoneyArea : MonoBehaviour
         if (_currentShownAmount == 0) yield break;
         if (other.TryGetComponent(out Player.Player _))
         {
-            for (int i = _currentShownAmount - 1; i >= 0; i--)
+            while (_currentShownAmount > 0)
             {
                 Earn();
-                Hide(i);
+                Hide(_currentShownAmount - 1);
                 yield return new WaitForSeconds(0.01f);
-                _currentShownAmount--;
             }
         }
     }

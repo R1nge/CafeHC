@@ -4,10 +4,15 @@ using UnityEngine;
 [Serializable]
 public class InventoryItem
 {
-    [SerializeField] private string itemName;
-    [SerializeField] private GameObject model;
+    [SerializeField] private ItemType itemType;
+    [SerializeField] private GameObject itemModel;
 
-    public string GetItemName() => itemName;
+    public ItemType GetItemType() => itemType;
+    public virtual GameObject GetItemModel() => itemModel;
 
-    public GameObject GetItemModel() => model;
+    public enum ItemType
+    {
+        CoffeeCup,
+        Garbage
+    }
 }

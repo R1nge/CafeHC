@@ -60,8 +60,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   item:
-    itemName: Coffee
-    model: {fileID: 4647429707951442129, guid: 11dd9e42ae833bb4190a535f40ad0aef, type: 3}
+    itemName: CoffeeCup
+    itemModel: {fileID: 4647429707951442129, guid: 11dd9e42ae833bb4190a535f40ad0aef, type: 3}
 --- !u!1 &2051376759121561163
 GameObject:
   m_ObjectHideFlags: 0

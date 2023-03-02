@@ -6,12 +6,9 @@ public class CoffeeCup : MonoBehaviour, IPickupable
 {
     [SerializeField] private InventoryItem item;
     private CoffeeFactory _coffeeFactory;
-
+    
     [Inject]
-    public void Construct(CoffeeFactory coffeeFactory)
-    {
-        _coffeeFactory = coffeeFactory;
-    }
+    private void Construct(CoffeeFactory factory) => _coffeeFactory = factory;
 
     public void Pickup(Inventory inventory)
     {

@@ -12,7 +12,7 @@ namespace Player
         private Vector3 _movementDirection;
 
         [Inject]
-        public void Construct(FloatingJoystick floatingJoystick) => _floatingJoystick = floatingJoystick;
+        private void Construct(FloatingJoystick floatingJoystick) => _floatingJoystick = floatingJoystick;
 
         private void Awake() => _rigidbody = GetComponent<Rigidbody>();
 

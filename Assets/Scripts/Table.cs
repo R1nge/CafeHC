@@ -1,14 +1,23 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 using Zenject;
 
 public class Table : MonoBehaviour
 {
+    [SerializeField] private float eatInterval;
+    [SerializeField] private GameObject garbage;
+    [SerializeField] private MoneyArea moneyArea;
+    [SerializeField] private InventoryItem garbageItem;
     private Inventory _inventory;
     private CoffeeFactory _coffeeFactory;
+    private PlayerInventory _playerInventory;
     private int _currentCount;
+    private int _eatenCount;
+    private YieldInstruction _coroutine;
+    private bool _isAvailable = true;
 
     [Inject]
-    public void Construct(CoffeeFactory coffeeFactory) => _coffeeFactory = coffeeFactory;
+    private void Construct(CoffeeFactory coffeeFactory) => _coffeeFactory = coffeeFactory;
 
     private void Awake()
     {
@@ -27,7 +36,9 @@ public class Table : MonoBehaviour
         );
 
         _coffeeFactory.GetFromPool(pos, Quaternion.identity, transform);
-        _currentCount++;
+        _currentCount = _inventory.GetCount();
+
+        _coroutine ??= StartCoroutine(Eat_c());
     }
 
     private void OnAllItemsRemoved()
@@ -43,13 +54,65 @@ public class Table : MonoBehaviour
     private void OnItemRemoved(InventoryItem item)
     {
         _coffeeFactory.ReturnToPool(transform.GetChild(transform.childCount - 1).gameObject);
+        _currentCount--;
+        _eatenCount++;
+        moneyArea.AddMoney(Random.Range(5, 10));
+    }
+
+    private IEnumerator Eat_c()
+    {
+        _isAvailable = false;
+        while (_currentCount >= 0)
+        {
+            if (_currentCount == 0)
+            {
+                EnableTrash();
+                _coroutine = null;
+                yield break;
+            }
+
+            yield return new WaitForSeconds(eatInterval);
+
+            _inventory.RemoveItem(_inventory.GetItem());
+            _eatenCount++;
+        }
+    }
+
+    private void EnableTrash()
+    {
+        garbage.SetActive(true);
+    }
+
+    private void Clean()
+    {
+        for (int i = 0; i < _eatenCount; i++)
+        {
+            _playerInventory.TryAddItem(garbageItem);
+        }
+
+        _eatenCount = 0;
+        garbage.SetActive(false);
+        _isAvailable = true;
     }
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.TryGetComponent(out CustomerInventory customerInventory))
         {
-            customerInventory.TryTransferTo(_inventory);
+            if (!_isAvailable) return;
+            var count = customerInventory.GetCount();
+            for (int i = count - 1; i >= 0; i--)
+            {
+                customerInventory.TryTransferTo(_inventory);
+            }
+        }
+        else if (other.TryGetComponent(out PlayerInventory playerInventory))
+        {
+            if (garbage.activeInHierarchy)
+            {
+                _playerInventory = playerInventory;
+                Clean();
+            }
         }
     }
 
