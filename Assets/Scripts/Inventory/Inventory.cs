@@ -55,6 +55,8 @@ public abstract class Inventory : MonoBehaviour
         {
             if (_items[^1].GetItemType() != item.GetItemType()) return false;
         }
+
+        if (item.GetItemType() == InventoryItem.ItemType.Garbage) return true;
         return _items.Count < maxAmount;
     }
 
