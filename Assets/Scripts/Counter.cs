@@ -22,7 +22,7 @@ public class Counter : MonoBehaviour
     {
         if (other.TryGetComponent(out PlayerInventory playerInventory))
         {
-            Add(playerInventory);
+            TransferFrom(playerInventory);
         }
         else if (other.TryGetComponent(out CustomerInventory customerInventory))
         {
@@ -30,8 +30,14 @@ public class Counter : MonoBehaviour
         }
     }
 
-    private void Add(PlayerInventory playerInventory)
+    private void TransferFrom(PlayerInventory playerInventory)
     {
+        if (playerInventory.GetCount() == 0) return;
+        if (playerInventory.GetItem().GetItemType() != InventoryItem.ItemType.CoffeeCup)
+        {
+            return;
+        }
+
         var count = playerInventory.GetCount();
         for (int i = 0; i < count; i++)
         {
@@ -41,12 +47,13 @@ public class Counter : MonoBehaviour
 
     private void TransferTo(CustomerInventory customerInventory)
     {
-        for (int i = 0; i < _currentCount; i++)
+        var count = _inventory.GetCount();
+        for (int i = 0; i < count; i++)
         {
             _inventory.TryTransferTo(customerInventory);
         }
 
-        _currentCount = 0;
+        _currentCount = _inventory.GetCount();
     }
 
     private void Spawn(InventoryItem item)
@@ -64,6 +71,7 @@ public class Counter : MonoBehaviour
     private void DeSpawn(InventoryItem item)
     {
         _coffeeFactory.ReturnToPool(spawnPoint.GetChild(spawnPoint.childCount - 1).gameObject);
+        _currentCount--;
     }
 
     private void OnDestroy()

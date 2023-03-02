@@ -85,6 +85,15 @@ public class Table : MonoBehaviour
 
     private void Clean()
     {
+        if (_playerInventory.GetCount() != 0)
+        {
+            if (_playerInventory.GetItem().GetItemType() != InventoryItem.ItemType.Garbage)
+            {
+                return;
+            }
+        }
+       
+        
         for (int i = 0; i < _eatenCount; i++)
         {
             _playerInventory.TryAddItem(garbageItem);

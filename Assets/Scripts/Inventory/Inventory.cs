@@ -53,7 +53,7 @@ public abstract class Inventory : MonoBehaviour
         if (item == null) return false;
         if (_items.Count != 0)
         {
-            if (_items[0].GetItemType() != item.GetItemType()) return false;
+            if (_items[^1].GetItemType() != item.GetItemType()) return false;
         }
         return _items.Count < maxAmount;
     }
