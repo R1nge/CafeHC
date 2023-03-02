@@ -33,15 +33,17 @@ namespace Player
             switch (item.GetItemType())
             {
                 case InventoryItem.ItemType.CoffeeCup:
-                    _coffeeFactory.GetFromPool(hand.position, Quaternion.identity, hand);
+                    _coffeeFactory.GetFromPool(GetPosition(), Quaternion.identity, hand);
                     break;
                 case InventoryItem.ItemType.Garbage:
-                    _garbageFactory.GetFromPool(hand.position, Quaternion.identity, hand);
+                    _garbageFactory.GetFromPool(GetPosition(), Quaternion.identity, hand);
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();
             }
         }
+
+        private Vector3 GetPosition() => hand.position + new Vector3(0, 0.05f * (_inventory.GetCount() - 1), 0);
 
         private void OnItemRemoved(InventoryItem item)
         {
