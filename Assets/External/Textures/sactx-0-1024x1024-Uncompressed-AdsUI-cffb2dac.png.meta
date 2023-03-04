@@ -1,0 +1,469 @@
+fileFormatVersion: 2
+guid: 05d9ed73a1428794c80eb359308e4d7c
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 21300000
+    second: Image_Forever
+  - first:
+      213: 21300002
+    second: Gradation_Blue
+  - first:
+      213: 21300004
+    second: Image_x2Money
+  - first:
+      213: 21300006
+    second: Label_SpacialRibbon_04
+  - first:
+      213: 21300008
+    second: Flame_SpacialGradation_04
+  - first:
+      213: 21300010
+    second: Btn_Gold
+  externalObjects: {}
+  serializedVersion: 12
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMasterTextureLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 4
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 0
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 0
+  flipbookColumns: 0
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  cookieLightType: 1
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Server
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Image_Forever
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 614
+        width: 226
+        height: 84
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -113, y: -42}
+        - {x: -113, y: 42}
+        - {x: 113, y: 42}
+        - {x: 113, y: -42}
+      physicsShape:
+      - - {x: 107.99999, y: -19.999998}
+        - {x: 107.99999, y: -7}
+        - {x: 105.99999, y: -2}
+        - {x: 106.99999, y: 11}
+        - {x: 97.99999, y: 21}
+        - {x: 9, y: 21}
+        - {x: -45, y: 19.999998}
+        - {x: -52, y: 21}
+        - {x: -104.99999, y: 21}
+        - {x: -105.99999, y: 18}
+        - {x: -105.99999, y: -19.999998}
+        - {x: -104, y: -22}
+        - {x: -94, y: -22.999998}
+        - {x: -85, y: -22.999998}
+        - {x: -79, y: -16}
+        - {x: -72, y: -21}
+        - {x: -68, y: -22.999998}
+        - {x: 106.99999, y: -22.999998}
+      tessellationDetail: 0
+      bones: []
+      spriteID: dcc38686c53a48a69b4ee5aeb74a37f0
+      internalID: 21300000
+      vertices:
+      - {x: 0, y: 84}
+      - {x: 226, y: 84}
+      - {x: 0, y: 0}
+      - {x: 226, y: 0}
+      indices: 000000000100000002000000020000000100000003000000
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Gradation_Blue
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 512
+        height: 512
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -256, y: -256}
+        - {x: -256, y: 256}
+        - {x: 256, y: 256}
+        - {x: 256, y: -256}
+      physicsShape:
+      - - {x: 96, y: -87}
+        - {x: 105.99999, y: -72}
+        - {x: 105.99999, y: -66.99999}
+        - {x: 110, y: -42}
+        - {x: 124, y: -26.999998}
+        - {x: 128, y: -22}
+        - {x: 128, y: 24}
+        - {x: 111, y: 42.999996}
+        - {x: 106.99999, y: 50}
+        - {x: 105.99999, y: 72}
+        - {x: 95, y: 87}
+        - {x: 79.99999, y: 101}
+        - {x: 72.99999, y: 104.99999}
+        - {x: 59.999996, y: 104}
+        - {x: 34, y: 115}
+        - {x: 25, y: 127}
+        - {x: 18, y: 128}
+        - {x: -19.999998, y: 128}
+        - {x: -26.999998, y: 123}
+        - {x: -35, y: 114}
+        - {x: -57, y: 104.99999}
+        - {x: -72.99999, y: 105.99999}
+        - {x: -87, y: 96}
+        - {x: -106.99999, y: 74}
+        - {x: -104.99999, y: 59.999996}
+        - {x: -105.99999, y: 48}
+        - {x: -117.99999, y: 28}
+        - {x: -123, y: 28}
+        - {x: -128, y: 21}
+        - {x: -128, y: -16}
+        - {x: -126, y: -24}
+        - {x: -122, y: -26.999998}
+        - {x: -112, y: -37}
+        - {x: -105.99999, y: -52}
+        - {x: -106.99999, y: -74}
+        - {x: -87, y: -96}
+        - {x: -72.99999, y: -106.99999}
+        - {x: -26.999998, y: -118.99999}
+        - {x: -26, y: -122}
+        - {x: -22.999998, y: -127}
+        - {x: -19, y: -128}
+        - {x: 25, y: -128}
+        - {x: 29, y: -118.99999}
+        - {x: 52, y: -105.99999}
+        - {x: 74, y: -106.99999}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3c1ebf6248574912b7f6d74bda1ab449
+      internalID: 21300002
+      vertices:
+      - {x: 0, y: 512}
+      - {x: 512, y: 512}
+      - {x: 0, y: 0}
+      - {x: 512, y: 0}
+      indices: 000000000100000002000000020000000100000003000000
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Image_x2Money
+      rect:
+        serializedVersion: 2
+        x: 516
+        y: 0
+        width: 248
+        height: 256
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -124, y: -128}
+        - {x: -124, y: 128}
+        - {x: 124, y: 128}
+        - {x: 124, y: -128}
+      physicsShape:
+      - - {x: 51.000004, y: -62.000004}
+        - {x: 96, y: -67.00001}
+        - {x: 102.00001, y: -62.000004}
+        - {x: 109, y: -41}
+        - {x: 109, y: 5.0000005}
+        - {x: 106, y: 23.000002}
+        - {x: 104.00001, y: 32}
+        - {x: 99.00001, y: 37.000004}
+        - {x: 91.00001, y: 38}
+        - {x: 79.00001, y: 39}
+        - {x: 73.00001, y: 46.000004}
+        - {x: 65, y: 74.00001}
+        - {x: 57.000004, y: 94}
+        - {x: 51.000004, y: 98}
+        - {x: 46.000004, y: 98}
+        - {x: -14.000001, y: 89}
+        - {x: -23.000002, y: 90}
+        - {x: -53, y: 85.00001}
+        - {x: -68.00001, y: 81}
+        - {x: -106, y: 76}
+        - {x: -113.00001, y: 71}
+        - {x: -122, y: 28.000002}
+        - {x: -123.00001, y: 14.000001}
+        - {x: -123.00001, y: 9}
+        - {x: -117.00001, y: -4}
+        - {x: -101.00001, y: -23.000002}
+        - {x: -98, y: -25.000002}
+        - {x: -87, y: -24}
+        - {x: -80.00001, y: -36}
+        - {x: -76, y: -45}
+        - {x: -72, y: -50.000004}
+        - {x: -49, y: -53}
+        - {x: -45, y: -60}
+        - {x: -52.000004, y: -69}
+        - {x: -56.000004, y: -77}
+        - {x: -61, y: -88}
+        - {x: -59, y: -90}
+        - {x: -31.000002, y: -90}
+        - {x: -27, y: -87}
+        - {x: -22, y: -90}
+        - {x: 1, y: -91.00001}
+        - {x: 55, y: -91.00001}
+        - {x: 57.000004, y: -89}
+        - {x: 57.000004, y: -67.00001}
+        - {x: 55, y: -65}
+      - - {x: -4, y: -64}
+        - {x: -6, y: -60}
+        - {x: 1, y: -60}
+        - {x: -2, y: -65}
+        - {x: -2, y: -68.00001}
+        - {x: -1, y: -68.00001}
+      tessellationDetail: 0
+      bones: []
+      spriteID: f14be92b581a46bd9e1397488041133c
+      internalID: 21300004
+      vertices:
+      - {x: 0, y: 256}
+      - {x: 248, y: 256}
+      - {x: 0, y: 0}
+      - {x: 248, y: 0}
+      indices: 000000000100000002000000020000000100000003000000
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Label_SpacialRibbon_04
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 516
+        width: 512
+        height: 94
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -256, y: -47}
+        - {x: -256, y: 47}
+        - {x: 256, y: 47}
+        - {x: 256, y: -47}
+      physicsShape:
+      - - {x: 244, y: 2}
+        - {x: 256, y: 36.000004}
+        - {x: 256, y: 47.000004}
+        - {x: -256, y: 47.000004}
+        - {x: -256, y: 34}
+        - {x: -248.00002, y: 5.0000005}
+        - {x: -256, y: -34}
+        - {x: -256, y: -47.000004}
+        - {x: 256, y: -47.000004}
+        - {x: 256, y: -36.000004}
+        - {x: 248.00002, y: -18.000002}
+      tessellationDetail: 0
+      bones: []
+      spriteID: c74603df2efb4a49983881b94478de45
+      internalID: 21300006
+      vertices:
+      - {x: 0, y: 94}
+      - {x: 512, y: 94}
+      - {x: 0, y: 0}
+      - {x: 512, y: 0}
+      indices: 000000000100000002000000020000000100000003000000
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Flame_SpacialGradation_04
+      rect:
+        serializedVersion: 2
+        x: 516
+        y: 260
+        width: 50
+        height: 256
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 22, y: 16, z: 21, w: 15}
+      outline:
+      - - {x: -25, y: -128}
+        - {x: -25, y: 128}
+        - {x: 25, y: 128}
+        - {x: 25, y: -128}
+      physicsShape:
+      - - {x: -25, y: 128}
+        - {x: -25, y: -128}
+        - {x: 25, y: -128}
+        - {x: 25, y: 128}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0dad3f76ed574ebe92b09a4e36402981
+      internalID: 21300008
+      vertices:
+      - {x: 0, y: 256}
+      - {x: 50, y: 256}
+      - {x: 0, y: 0}
+      - {x: 50, y: 0}
+      indices: 000000000100000002000000020000000100000003000000
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Btn_Gold
+      rect:
+        serializedVersion: 2
+        x: 768
+        y: 0
+        width: 166
+        height: 110
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 112, y: 0, z: 51, w: 0}
+      outline:
+      - - {x: -83, y: -55}
+        - {x: -83, y: 55}
+        - {x: 83, y: 55}
+        - {x: 83, y: -55}
+      physicsShape:
+      - - {x: -83, y: 55}
+        - {x: -83, y: -53.999996}
+        - {x: -82, y: -55}
+        - {x: 79.99999, y: -55}
+        - {x: 82, y: -53.999996}
+        - {x: 82, y: 50}
+        - {x: 81, y: 55}
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1d387fdb4227493ebea1dbfa4be0ec32
+      internalID: 21300010
+      vertices:
+      - {x: 0, y: 110}
+      - {x: 166, y: 110}
+      - {x: 0, y: 0}
+      - {x: 166, y: 0}
+      indices: 000000000100000002000000020000000100000003000000
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    nameFileIdTable:
+      Btn_Gold: 21300010
+      Flame_SpacialGradation_04: 21300008
+      Gradation_Blue: 21300002
+      Image_Forever: 21300000
+      Image_x2Money: 21300004
+      Label_SpacialRibbon_04: 21300006
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
