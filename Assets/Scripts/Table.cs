@@ -6,7 +6,7 @@ public class Table : MonoBehaviour
     [SerializeField] private float eatInterval;
     [SerializeField] private GameObject garbage;
     [SerializeField] private MoneyArea moneyArea;
-    private GarbageItem _garbageItem;
+    private GarbageItem _garbageItem = new();
     private Inventory _inventory;
     private PlayerInventory _playerInventory;
     private int _currentCount;

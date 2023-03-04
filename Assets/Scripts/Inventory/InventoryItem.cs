@@ -6,7 +6,7 @@
         Garbage
     }
 
-    public ItemType itemType;
+    public abstract ItemType itemType { get; }
 
     public bool CompareType(ItemType type) => itemType.Equals(type);
 }

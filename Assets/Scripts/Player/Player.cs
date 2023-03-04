@@ -1,6 +1,5 @@
 ﻿using Pickupable;
 using UnityEngine;
-using Zenject;
 
 namespace Player
 {

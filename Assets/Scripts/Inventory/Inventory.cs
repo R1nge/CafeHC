@@ -55,7 +55,7 @@ public abstract class Inventory : MonoBehaviour
             OnItemAddedEvent?.Invoke(item);
             return true;
         }
-
+        
         return false;
     }
 
