@@ -1,5 +1,4 @@
-﻿using Pickupable;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Player
 {
@@ -38,14 +37,6 @@ namespace Player
             {
                 var child = hand.GetChild(i).gameObject;
                 _inventory.ReturnToPool(item, child);
-            }
-        }
-
-        private void OnTriggerEnter(Collider other)
-        {
-            if (other.TryGetComponent(out IPickupable pickupable))
-            {
-                pickupable.Pickup(_inventory);
             }
         }
 

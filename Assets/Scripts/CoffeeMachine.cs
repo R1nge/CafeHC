@@ -1,17 +1,29 @@
 ﻿using System.Collections;
 using UnityEngine;
-using Zenject;
 
 public class CoffeeMachine : MonoBehaviour
 {
     [SerializeField] private float delay;
     [SerializeField] private Transform spawnPoint;
-    [SerializeField] private int maxCount;
-    private int _currentCount;
-    private CoffeeFactory _coffeeFactory;
+    private Inventory _inventory;
+    private readonly CoffeeItem _coffeeItem = new();
 
-    [Inject]
-    private void Construct(CoffeeFactory coffeeFactory) => _coffeeFactory = coffeeFactory;
+    private void Awake()
+    {
+        _inventory = GetComponent<Inventory>();
+        _inventory.OnItemAddedEvent += Spawn;
+        _inventory.OnItemRemovedEvent += DeSpawn;
+    }
+
+    private void Spawn(InventoryItem item)
+    {
+        _inventory.GetFromPool(_coffeeItem, GetPosition(), Quaternion.identity, spawnPoint);
+    }
+
+    private void DeSpawn(InventoryItem item)
+    {
+        _inventory.ReturnToPool(item, spawnPoint.GetChild(spawnPoint.childCount - 1).gameObject);
+    }
 
     private void Start() => StartCoroutine(Spawn_c());
 
@@ -19,13 +31,46 @@ public class CoffeeMachine : MonoBehaviour
     {
         while (enabled)
         {
-            _currentCount = spawnPoint.childCount;
             yield return new WaitForSeconds(delay);
-            if (_currentCount < maxCount)
+            _inventory.TryAddItem(_coffeeItem);
+        }
+    }
+
+    private Vector3 GetPosition()
+    {
+        var position = spawnPoint.position - Vector3.right * 0.025f;
+        var count = _inventory.GetCount();
+
+        if (count % 2 == 0)
+        {
+            position += Vector3.right * 0.05f;
+            position += new Vector3(0, 0.05f * Mathf.Floor((count - 1) / 2f));
+            return position;
+        }
+
+        if (count % 2 == 1)
+        {
+            position += new Vector3(0, 0.05f * Mathf.Floor(count / 2f));
+        }
+
+        return position;
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.TryGetComponent(out Inventory inventory))
+        {
+            var count = _inventory.GetCount();
+            for (int i = 0; i < count; i++)
             {
-                //TODO: spawn in different positions
-                _coffeeFactory.GetFromPool(spawnPoint.position, Quaternion.identity, spawnPoint);
+                _inventory.TryTransferTo(inventory);
             }
         }
+    }
+
+    private void OnDestroy()
+    {
+        _inventory.OnItemAddedEvent -= Spawn;
+        _inventory.OnItemRemovedEvent -= DeSpawn;
     }
 }

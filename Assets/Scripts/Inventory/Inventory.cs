@@ -55,20 +55,43 @@ public abstract class Inventory : MonoBehaviour
             OnItemAddedEvent?.Invoke(item);
             return true;
         }
-        
+
         return false;
     }
 
     private bool CanAddItem(InventoryItem item)
     {
-        if (item == null) return false;
+        if (item == null)
+        {
+            return false;
+        }
+        
         if (_items.Count != 0)
         {
-            return _items[^1].GetType() == item.GetType();
+            if (_items.Count < maxAmount)
+            {
+                return _items[^1].GetType() == item.GetType();
+            }
+
+            if (item.CompareType(InventoryItem.ItemType.Garbage))
+            {
+                return true;
+            }
+
+            return false;
+        }
+        
+        if (_items.Count < maxAmount)
+        {
+            return true;
         }
 
-        if (item.CompareType(InventoryItem.ItemType.Garbage)) return true;
-        return _items.Count < maxAmount;
+        if (item.CompareType(InventoryItem.ItemType.Garbage))
+        {
+            return true;
+        }
+        
+        return false;
     }
 
     public void RemoveItem(InventoryItem item)
