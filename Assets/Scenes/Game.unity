@@ -38541,6 +38541,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Customer
       objectReference: {fileID: 0}
+    - target: {fileID: 7304476155033326270, guid: 6fdafe8cc256a6c46bd8eb48dd15f46d, type: 3}
+      propertyPath: m_UseGravity
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6fdafe8cc256a6c46bd8eb48dd15f46d, type: 3}
 --- !u!4 &7304964411081661991

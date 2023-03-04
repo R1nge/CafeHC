@@ -1,20 +1,20 @@
 ﻿using Pickupable;
 using UnityEngine;
-using Zenject;
 
 public class CoffeeCup : MonoBehaviour, IPickupable
 {
-    [SerializeField] private InventoryItem item;
-    private CoffeeFactory _coffeeFactory;
-    
-    [Inject]
-    private void Construct(CoffeeFactory factory) => _coffeeFactory = factory;
+    private CoffeeItem _item = new();
+
+    private void Awake()
+    {
+        _item.itemType = InventoryItem.ItemType.Coffee;
+    }
 
     public void Pickup(Inventory inventory)
     {
-        if (inventory.TryAddItem(item))
+        if (inventory.TryAddItem(_item))
         {
-            _coffeeFactory.ReturnToPool(gameObject);
+            inventory.ReturnToPool(_item, gameObject);
         }
     }
 }

@@ -1,5 +1,4 @@
-﻿using System;
-using Pickupable;
+﻿using Pickupable;
 using UnityEngine;
 using Zenject;
 
@@ -9,15 +8,6 @@ namespace Player
     {
         [SerializeField] private Transform hand;
         private Inventory _inventory;
-        private CoffeeFactory _coffeeFactory;
-        private GarbageFactory _garbageFactory;
-
-        [Inject]
-        private void Construct(CoffeeFactory coffeeFactory, GarbageFactory garbageFactory)
-        {
-            _coffeeFactory = coffeeFactory;
-            _garbageFactory = garbageFactory;
-        }
 
         private void Awake()
         {
@@ -29,42 +19,26 @@ namespace Player
 
         private void OnItemAdded(InventoryItem item)
         {
-            //TODO: think of a better solution
-            switch (item.GetItemType())
-            {
-                case InventoryItem.ItemType.CoffeeCup:
-                    _coffeeFactory.GetFromPool(GetPosition(), Quaternion.identity, hand);
-                    break;
-                case InventoryItem.ItemType.Garbage:
-                    _garbageFactory.GetFromPool(GetPosition(), Quaternion.identity, hand);
-                    break;
-                default:
-                    throw new ArgumentOutOfRangeException();
-            }
+            _inventory.GetFromPool(item, GetPosition(), Quaternion.identity, hand);
         }
 
-        private Vector3 GetPosition() => hand.position + new Vector3(0, 0.05f * (_inventory.GetCount() - 1), 0);
+        private Vector3 GetPosition()
+        {
+            return hand.position + new Vector3(0, 0.05f * (_inventory.GetCount() - 1), 0);
+        }
 
         private void OnItemRemoved(InventoryItem item)
         {
-            switch (item.GetItemType())
-            {
-                case InventoryItem.ItemType.CoffeeCup:
-                    _coffeeFactory.ReturnToPool(hand.GetChild(hand.childCount - 1).gameObject);
-                    break;
-                case InventoryItem.ItemType.Garbage:
-                    _garbageFactory.ReturnToPool(hand.GetChild(hand.childCount - 1).gameObject);
-                    break;
-                default:
-                    throw new ArgumentOutOfRangeException();
-            }
+            var lastChild = hand.GetChild(hand.childCount - 1).gameObject;
+            _inventory.ReturnToPool(item, lastChild);
         }
 
-        private void OnAllItemsRemoved()
+        private void OnAllItemsRemoved(InventoryItem item)
         {
             for (int i = hand.childCount - 1; i >= 0; i--)
             {
-                _coffeeFactory.ReturnToPool(hand.GetChild(i).gameObject);
+                var child = hand.GetChild(i).gameObject;
+                _inventory.ReturnToPool(item, child);
             }
         }
 

@@ -1,18 +1,12 @@
-﻿using System;
-using UnityEngine;
-
-[Serializable]
-public class InventoryItem
+﻿public abstract class InventoryItem
 {
-    [SerializeField] private ItemType itemType;
-    [SerializeField] private GameObject itemModel;
-
-    public ItemType GetItemType() => itemType;
-    public virtual GameObject GetItemModel() => itemModel;
-
     public enum ItemType
     {
-        CoffeeCup,
+        Coffee,
         Garbage
     }
+
+    public ItemType itemType;
+
+    public bool CompareType(ItemType type) => itemType.Equals(type);
 }

@@ -6,10 +6,6 @@ namespace AI
     public class Customer : MonoBehaviour
     {
         private Inventory _inventory;
-        private CoffeeFactory _coffeeFactory;
-
-        [Inject]
-        public void Construct(CoffeeFactory coffeeFactory) => _coffeeFactory = coffeeFactory;
 
         private void Awake()
         {
@@ -20,12 +16,12 @@ namespace AI
 
         private void OnItemAdded(InventoryItem item)
         {
-            _coffeeFactory.GetFromPool(transform.position, Quaternion.identity, transform);
+            _inventory.GetFromPool(item, transform.position, Quaternion.identity, transform);
         }
 
         private void OnItemRemoved(InventoryItem item)
         {
-            _coffeeFactory.ReturnToPool(transform.GetChild(transform.childCount - 1).gameObject);
+            _inventory.ReturnToPool(item, transform.GetChild(transform.childCount - 1).gameObject);
         }
 
         private void OnDestroy()

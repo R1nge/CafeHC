@@ -1,15 +1,10 @@
 ﻿using UnityEngine;
-using Zenject;
 
 public class Counter : MonoBehaviour
 {
     [SerializeField] private Transform spawnPoint;
-    private CoffeeFactory _coffeeFactory;
     private int _currentCount;
     private Inventory _inventory;
-
-    [Inject]
-    private void Construct(CoffeeFactory coffeeFactory) => _coffeeFactory = coffeeFactory;
 
     private void Awake()
     {
@@ -33,15 +28,14 @@ public class Counter : MonoBehaviour
     private void TransferFrom(PlayerInventory playerInventory)
     {
         if (playerInventory.GetCount() == 0) return;
-        if (playerInventory.GetItem().GetItemType() != InventoryItem.ItemType.CoffeeCup)
-        {
-            return;
-        }
 
-        var count = playerInventory.GetCount();
-        for (int i = 0; i < count; i++)
+        if (playerInventory.GetItem().CompareType(InventoryItem.ItemType.Coffee))
         {
-            playerInventory.TryTransferTo(_inventory);
+            var count = playerInventory.GetCount();
+            for (int i = 0; i < count; i++)
+            {
+                playerInventory.TryTransferTo(_inventory);
+            }
         }
     }
 
@@ -64,13 +58,13 @@ public class Counter : MonoBehaviour
             spawnPoint.position.z
         );
 
-        _coffeeFactory.GetFromPool(pos, Quaternion.identity, spawnPoint);
+        _inventory.GetFromPool(item, pos, Quaternion.identity, spawnPoint);
         _currentCount++;
     }
 
     private void DeSpawn(InventoryItem item)
     {
-        _coffeeFactory.ReturnToPool(spawnPoint.GetChild(spawnPoint.childCount - 1).gameObject);
+        _inventory.ReturnToPool(item, spawnPoint.GetChild(spawnPoint.childCount - 1).gameObject);
         _currentCount--;
     }
 

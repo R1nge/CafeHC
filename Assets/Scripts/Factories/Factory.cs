@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Zenject;
 
-public class Factory<T> : MonoBehaviour where T : MonoBehaviour 
+public class Factory<T> : MonoBehaviour where T : MonoBehaviour
 {
     private List<T> _pool;
     private DiContainer _diContainer;
@@ -10,7 +10,7 @@ public class Factory<T> : MonoBehaviour where T : MonoBehaviour
     [Inject]
     public void Construct(DiContainer diContainer) => _diContainer = diContainer;
 
-    public T GetNewInstance(T go, Vector3 pos, Quaternion rot, Transform parent)
+    public T SpawnNewInstance(T go, Vector3 pos, Quaternion rot, Transform parent)
     {
         var instance = _diContainer.InstantiatePrefab(go, pos, rot, parent);
         instance.SetActive(true);
@@ -66,7 +66,7 @@ public class Factory<T> : MonoBehaviour where T : MonoBehaviour
 
     private void AddToPool()
     {
-        var instance = GetNewInstance(_pool[0], Vector3.zero, Quaternion.identity, null);
+        var instance = SpawnNewInstance(_pool[0], Vector3.zero, Quaternion.identity, null);
         instance.gameObject.SetActive(false);
         _pool.Add(instance);
     }
@@ -98,7 +98,7 @@ public class Factory<T> : MonoBehaviour where T : MonoBehaviour
             _pool[i].gameObject.SetActive(true);
             return _pool[i];
         }
-
+        
         return null;
     }
 

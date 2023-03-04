@@ -1,23 +1,18 @@
 ﻿using System.Collections;
 using UnityEngine;
-using Zenject;
 
 public class Table : MonoBehaviour
 {
     [SerializeField] private float eatInterval;
     [SerializeField] private GameObject garbage;
     [SerializeField] private MoneyArea moneyArea;
-    [SerializeField] private InventoryItem garbageItem;
+    private GarbageItem _garbageItem;
     private Inventory _inventory;
-    private CoffeeFactory _coffeeFactory;
     private PlayerInventory _playerInventory;
     private int _currentCount;
     private int _eatenCount;
     private YieldInstruction _coroutine;
     private bool _isAvailable = true;
-
-    [Inject]
-    private void Construct(CoffeeFactory coffeeFactory) => _coffeeFactory = coffeeFactory;
 
     private void Awake()
     {
@@ -29,23 +24,26 @@ public class Table : MonoBehaviour
 
     private void OnItemAdded(InventoryItem item)
     {
-        var pos = new Vector3(
-            transform.position.x,
-            transform.position.y + 0.1f + 0.05f * _currentCount,
-            transform.position.z
-        );
-
-        _coffeeFactory.GetFromPool(pos, Quaternion.identity, transform);
+        _inventory.GetFromPool(item, GetPosition(), Quaternion.identity, transform);
         _currentCount = _inventory.GetCount();
 
         _coroutine ??= StartCoroutine(Eat_c());
     }
 
-    private void OnAllItemsRemoved()
+    private Vector3 GetPosition()
+    {
+        return new Vector3(
+            transform.position.x,
+            transform.position.y + 0.1f + 0.05f * _currentCount,
+            transform.position.z
+        );
+    }
+
+    private void OnAllItemsRemoved(InventoryItem item)
     {
         for (int i = transform.childCount - 1; i >= 0; i--)
         {
-            _coffeeFactory.ReturnToPool(transform.GetChild(i).gameObject);
+            _inventory.ReturnToPool(item, transform.GetChild(i).gameObject);
         }
 
         _currentCount = 0;
@@ -53,7 +51,7 @@ public class Table : MonoBehaviour
 
     private void OnItemRemoved(InventoryItem item)
     {
-        _coffeeFactory.ReturnToPool(transform.GetChild(transform.childCount - 1).gameObject);
+        _inventory.ReturnToPool(item, transform.GetChild(transform.childCount - 1).gameObject);
         _currentCount--;
         moneyArea.AddMoney(Random.Range(5, 10));
     }
@@ -65,7 +63,7 @@ public class Table : MonoBehaviour
         {
             if (_currentCount == 0)
             {
-                EnableTrash();
+                garbage.SetActive(true);
                 _coroutine = null;
                 yield break;
             }
@@ -77,25 +75,19 @@ public class Table : MonoBehaviour
         }
     }
 
-    private void EnableTrash()
-    {
-        garbage.SetActive(true);
-    }
-
     private void Clean()
     {
         if (_playerInventory.GetCount() != 0)
         {
-            if (_playerInventory.GetItem().GetItemType() != InventoryItem.ItemType.Garbage)
+            if (!_playerInventory.GetItem().CompareType(InventoryItem.ItemType.Garbage))
             {
                 return;
             }
         }
-       
-        
+
         for (int i = 0; i < _eatenCount; i++)
         {
-            _playerInventory.TryAddItem(garbageItem);
+            _playerInventory.TryAddItem(_garbageItem);
         }
 
         _eatenCount = 0;
