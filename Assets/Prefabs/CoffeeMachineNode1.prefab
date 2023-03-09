@@ -1262,6 +1262,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   delay: 2
   spawnPoint: {fileID: 6263800515265236710}
+  offsetX: 0.5
+  offsetY: 0.5
 --- !u!114 &2257114776992361665
 MonoBehaviour:
   m_ObjectHideFlags: 0

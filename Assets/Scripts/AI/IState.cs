@@ -1,0 +1,12 @@
+﻿using UnityEngine;
+
+namespace AI
+{
+    public interface IState
+    {
+        void Enter();
+        void Exit();
+        void Update();
+        void OnTriggerEnter(Collider other);
+    }
+}

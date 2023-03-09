@@ -5,6 +5,7 @@ namespace Player
     public class Player : MonoBehaviour
     {
         [SerializeField] private Transform hand;
+        [SerializeField] private float offsetY;
         private Inventory _inventory;
 
         private void Awake()
@@ -22,7 +23,7 @@ namespace Player
 
         private Vector3 GetPosition()
         {
-            return hand.position + new Vector3(0, 0.05f * (_inventory.GetCount() - 1), 0);
+            return hand.position + new Vector3(0, offsetY * (_inventory.GetCount() - 1), 0);
         }
 
         private void OnItemRemoved(InventoryItem item)

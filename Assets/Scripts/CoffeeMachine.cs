@@ -5,6 +5,7 @@ public class CoffeeMachine : MonoBehaviour
 {
     [SerializeField] private float delay;
     [SerializeField] private Transform spawnPoint;
+    [SerializeField] private float offsetX, offsetY;
     private Inventory _inventory;
     private readonly CoffeeItem _coffeeItem = new();
 
@@ -38,19 +39,19 @@ public class CoffeeMachine : MonoBehaviour
 
     private Vector3 GetPosition()
     {
-        var position = spawnPoint.position - Vector3.right * 0.025f;
+        var position = spawnPoint.position - Vector3.right * offsetX / 2f;
         var count = _inventory.GetCount();
 
         if (count % 2 == 0)
         {
-            position += Vector3.right * 0.05f;
-            position += new Vector3(0, 0.05f * Mathf.Floor((count - 1) / 2f));
+            position += Vector3.right * offsetX;
+            position += new Vector3(0, offsetY * Mathf.Floor((count - 1) / 2f));
             return position;
         }
 
         if (count % 2 == 1)
         {
-            position += new Vector3(0, 0.05f * Mathf.Floor(count / 2f));
+            position += new Vector3(0, offsetY * Mathf.Floor(count / 2f));
         }
 
         return position;

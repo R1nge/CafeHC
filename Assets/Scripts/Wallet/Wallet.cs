@@ -40,7 +40,7 @@ public class Wallet : MonoBehaviour
             return false;
         }
 
-        if (Money - amount > 0)
+        if (Money - amount >= 0)
         {
             Money -= amount;
             return true;

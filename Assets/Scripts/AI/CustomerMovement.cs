@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.AI;
 
 namespace AI
@@ -6,13 +7,25 @@ namespace AI
     public class CustomerMovement : MonoBehaviour
     {
         private NavMeshAgent _navMeshAgent;
+        private int _currentIndex;
+
+        //TODO: inject
+        private Waypoints _waypoints;
 
         private void Awake()
         {
             _navMeshAgent = GetComponent<NavMeshAgent>();
+            _waypoints = FindObjectOfType<Waypoints>();
+            _currentIndex = _waypoints.LastIndex();
+            _waypoints.AddCustomer(this);
         }
 
-        public void SetDestination(Vector3 position)
+        public void MoveToNextWaypoint()
+        {
+            MoveTo(_waypoints.GetWaypoints()[_currentIndex--].position);
+        }
+
+        public void MoveTo(Vector3 position)
         {
             _navMeshAgent.SetDestination(position);
         }

@@ -3,6 +3,7 @@
 public class Counter : MonoBehaviour
 {
     [SerializeField] private Transform spawnPoint;
+    [SerializeField] private float offsetY;
     private int _currentCount;
     private Inventory _inventory;
 
@@ -54,7 +55,7 @@ public class Counter : MonoBehaviour
     {
         var pos = new Vector3(
             spawnPoint.position.x,
-            spawnPoint.position.y + 0.05f * _currentCount,
+            spawnPoint.position.y + offsetY * _currentCount,
             spawnPoint.position.z
         );
 

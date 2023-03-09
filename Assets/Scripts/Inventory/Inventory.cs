@@ -65,33 +65,18 @@ public abstract class Inventory : MonoBehaviour
         {
             return false;
         }
-        
-        if (_items.Count != 0)
+
+        if (_items.Count < maxAmount)
         {
-            if (_items.Count < maxAmount)
+            if (_items.Count != 0)
             {
                 return _items[^1].GetType() == item.GetType();
             }
 
-            if (item.CompareType(InventoryItem.ItemType.Garbage))
-            {
-                return true;
-            }
-
-            return false;
-        }
-        
-        if (_items.Count < maxAmount)
-        {
-            return true;
-        }
-
-        if (item.CompareType(InventoryItem.ItemType.Garbage))
-        {
             return true;
         }
         
-        return false;
+        return IgnoreCapacity(item);
     }
 
     public void RemoveItem(InventoryItem item)
@@ -102,6 +87,7 @@ public abstract class Inventory : MonoBehaviour
 
     public void RemoveAllItems()
     {
+        if (GetCount() == 0) return;
         OnAllItemsRemovedEvent?.Invoke(_items[^1]);
         _items.Clear();
     }
@@ -110,6 +96,16 @@ public abstract class Inventory : MonoBehaviour
     {
         this.maxAmount = maxAmount;
         OnMaxAmountChangedEvent?.Invoke(this.maxAmount);
+    }
+
+    private bool IgnoreCapacity(InventoryItem item)
+    {
+        if (item.CompareType(InventoryItem.ItemType.Garbage))
+        {
+            return true;
+        }
+
+        return false;
     }
 
     public void GetFromPool(InventoryItem item, Vector3 position, Quaternion rotation, Transform parent)

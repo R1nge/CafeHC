@@ -27,7 +27,7 @@ Transform:
   m_GameObject: {fileID: 1903583004138058726}
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 10, y: 10, z: 10}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5757279157451737089}
@@ -59,9 +59,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c42d1b5e7ab244f6900eb70a96b4ad13, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  item:
-    itemName: CoffeeCup
-    itemModel: {fileID: 4647429707951442129, guid: 11dd9e42ae833bb4190a535f40ad0aef, type: 3}
 --- !u!1 &2051376759121561163
 GameObject:
   m_ObjectHideFlags: 0
