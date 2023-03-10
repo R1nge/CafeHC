@@ -438,7 +438,7 @@ GameObject:
   - component: {fileID: 3653721316574378954}
   - component: {fileID: 2044860549932772150}
   - component: {fileID: 7932999549984707290}
-  - component: {fileID: 1475673188114403435}
+  - component: {fileID: 301809698865369045}
   m_Layer: 0
   m_Name: chair
   m_TagString: Untagged
@@ -511,7 +511,7 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &1475673188114403435
+--- !u!114 &301809698865369045
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -520,10 +520,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 5114496103036866328}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4d5edf2f1c4a49f0b9e693857fb36a1b, type: 3}
+  m_Script: {fileID: 11500000, guid: 5c34271bc998426997b0526851be8bb7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  seatPoint: {fileID: 0}
+  position: {fileID: 3653721316574378954}
 --- !u!1 &5553787332852285468
 GameObject:
   m_ObjectHideFlags: 0
@@ -533,9 +533,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1347637080808549954}
-  - component: {fileID: 5834754924268725012}
+  - component: {fileID: 8249529924542125714}
   m_Layer: 0
-  m_Name: Table
+  m_Name: table
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -562,7 +562,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &5834754924268725012
+--- !u!114 &8249529924542125714
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -571,12 +571,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 5553787332852285468}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f02f5f4b17494828be8da79d2ad81d29, type: 3}
+  m_Script: {fileID: 11500000, guid: 45897e5a54a648b9912bdd9eb2673dce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  seats:
-  - {fileID: 1475673188114403435}
-  - {fileID: 6344548973133750750}
+  _seats:
+  - {fileID: 301809698865369045}
+  - {fileID: 5371717225776429141}
 --- !u!1 &6963181051485640254
 GameObject:
   m_ObjectHideFlags: 0
@@ -621,7 +621,7 @@ GameObject:
   - component: {fileID: 421313388947181564}
   - component: {fileID: 6146160357269585718}
   - component: {fileID: 1772674892503887226}
-  - component: {fileID: 6344548973133750750}
+  - component: {fileID: 5371717225776429141}
   m_Layer: 0
   m_Name: chair (1)
   m_TagString: Untagged
@@ -694,7 +694,7 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &6344548973133750750
+--- !u!114 &5371717225776429141
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -703,10 +703,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 6990232739972597290}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4d5edf2f1c4a49f0b9e693857fb36a1b, type: 3}
+  m_Script: {fileID: 11500000, guid: 5c34271bc998426997b0526851be8bb7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  seatPoint: {fileID: 0}
+  position: {fileID: 421313388947181564}
 --- !u!1 &9016430598629770414
 GameObject:
   m_ObjectHideFlags: 0
@@ -720,7 +720,6 @@ GameObject:
   - component: {fileID: 353081567272459500}
   - component: {fileID: 7643943723913345264}
   - component: {fileID: 7643943723913345270}
-  - component: {fileID: 7643943723913345265}
   - component: {fileID: 7643943723913345271}
   m_Layer: 6
   m_Name: Table
@@ -821,23 +820,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.14, y: 0.1, z: 0.14}
   m_Center: {x: 0, y: 0.045109086, z: 0.0000001527369}
---- !u!114 &7643943723913345265
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9016430598629770414}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b9df496faeb24e92af76671a88aed229, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  eatInterval: 2
-  garbage: {fileID: 6963181051485640254}
-  moneyArea: {fileID: 0}
-  spawnPoint: {fileID: 4419810428417288651}
-  offsetY: 0.5
 --- !u!114 &7643943723913345271
 MonoBehaviour:
   m_ObjectHideFlags: 0

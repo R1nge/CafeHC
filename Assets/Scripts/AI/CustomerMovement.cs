@@ -16,7 +16,7 @@ namespace AI
         {
             _navMeshAgent = GetComponent<NavMeshAgent>();
             _waypoints = FindObjectOfType<Waypoints>();
-            _currentIndex = _waypoints.LastIndex();
+            _currentIndex = _waypoints.GetLastIndex();
             _waypoints.AddCustomer(this);
         }
 

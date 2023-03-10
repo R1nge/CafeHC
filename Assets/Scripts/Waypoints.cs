@@ -6,10 +6,10 @@ using UnityEngine;
 public class Waypoints : MonoBehaviour
 {
     [SerializeField] private Transform[] waypoints;
-    private List<CustomerMovement> _customers = new();
+    private readonly List<CustomerMovement> _customers = new();
     public event Action OnCustomerRemoved;
 
-    public int LastIndex() => _customers.Count;
+    public int GetLastIndex() => _customers.Count;
 
     public Transform[] GetWaypoints() => waypoints;
 

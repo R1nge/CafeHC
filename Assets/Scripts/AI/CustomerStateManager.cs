@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Tables;
 using UnityEngine;
 
 namespace AI
@@ -10,6 +11,7 @@ namespace AI
         private IState _currentState;
         private CustomerMovement _customerMovement;
         private Waypoints _waypoints;
+        private TableManager _tableManager;
 
         private void Awake()
         {
@@ -25,12 +27,13 @@ namespace AI
         {
             _customerMovement = GetComponent<CustomerMovement>();
             _waypoints = FindObjectOfType<Waypoints>();
+            _tableManager = FindObjectOfType<TableManager>();
 
             _states = new Dictionary<Type, IState>
             {
                 [typeof(CustomerInQueueState)] = new CustomerInQueueState(this, _customerMovement, _waypoints),
-                [typeof(CustomerAtCounterState)] = new CustomerAtCounterState(this, _customerMovement, _waypoints),
-                [typeof(CustomerSearchForFreeTableState)] = new CustomerSearchForFreeTableState()
+                [typeof(CustomerAtCounterState)] = new CustomerAtCounterState(this),
+                [typeof(CustomerSearchForFreeTableState)] = new CustomerSearchForFreeTableState(_tableManager, _customerMovement, _waypoints)
             };
         }
 

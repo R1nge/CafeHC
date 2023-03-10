@@ -1,26 +1,19 @@
-﻿using UnityEngine;
+﻿using Tables;
+using UnityEngine;
 
 namespace AI
 {
     public class CustomerAtCounterState : IState
     {
-        private CustomerOrder _customerOrder;
         private readonly CustomerStateManager _stateManager;
-        private readonly CustomerMovement _customerMovement;
-        private readonly Waypoints _waypoints;
 
-        public CustomerAtCounterState(CustomerStateManager customerStateManager, CustomerMovement customerMovement,
-            Waypoints waypoints)
+        public CustomerAtCounterState(CustomerStateManager customerStateManager )
         {
             _stateManager = customerStateManager;
-            _customerMovement = customerMovement;
-            _waypoints = waypoints;
         }
 
         public void Enter()
         {
-            _customerOrder = new CustomerOrder(_customerMovement);
-            _customerOrder.MakeOrder();
             //TODO: make order
             Debug.Log("AT COUNTER");
             _stateManager.SetCustomerSearchForFreeTable();
@@ -28,7 +21,6 @@ namespace AI
 
         public void Exit()
         {
-            _waypoints.RemoveCustomer();
         }
 
         public void Update()
