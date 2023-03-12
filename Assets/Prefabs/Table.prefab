@@ -535,7 +535,7 @@ GameObject:
   - component: {fileID: 1347637080808549954}
   - component: {fileID: 8249529924542125714}
   m_Layer: 0
-  m_Name: table
+  m_Name: Table
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -574,7 +574,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 45897e5a54a648b9912bdd9eb2673dce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _seats:
+  seats:
   - {fileID: 301809698865369045}
   - {fileID: 5371717225776429141}
 --- !u!1 &6963181051485640254

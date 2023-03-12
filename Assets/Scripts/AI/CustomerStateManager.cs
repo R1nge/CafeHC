@@ -7,9 +7,14 @@ namespace AI
 {
     public class CustomerStateManager : MonoBehaviour
     {
+        //TODO: redo state machine
         private Dictionary<Type, IState> _states;
         private IState _currentState;
         private CustomerMovement _customerMovement;
+        private Inventory _inventory;
+        private CustomerInventoryUI _inventoryUI;
+
+        //TODO: Inject
         private Waypoints _waypoints;
         private TableManager _tableManager;
 
@@ -28,11 +33,13 @@ namespace AI
             _customerMovement = GetComponent<CustomerMovement>();
             _waypoints = FindObjectOfType<Waypoints>();
             _tableManager = FindObjectOfType<TableManager>();
+            _inventory = GetComponent<Inventory>();
+            _inventoryUI = GetComponent<CustomerInventoryUI>();
 
             _states = new Dictionary<Type, IState>
             {
                 [typeof(CustomerInQueueState)] = new CustomerInQueueState(this, _customerMovement, _waypoints),
-                [typeof(CustomerAtCounterState)] = new CustomerAtCounterState(this),
+                [typeof(CustomerOrderState)] = new CustomerOrderState(_inventory, _inventoryUI),
                 [typeof(CustomerSearchForFreeTableState)] = new CustomerSearchForFreeTableState(_tableManager, _customerMovement, _waypoints)
             };
         }
@@ -42,9 +49,9 @@ namespace AI
             SetState(GetState<CustomerInQueueState>());
         }
 
-        public void SetCustomerAtCounter()
+        public void SetCustomerOrderState()
         {
-            SetState(GetState<CustomerAtCounterState>());
+            SetState(GetState<CustomerOrderState>());
         }
 
         public void SetCustomerSearchForFreeTable()

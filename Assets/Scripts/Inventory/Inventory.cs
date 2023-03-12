@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using JetBrains.Annotations;
 using UnityEngine;
 using Zenject;
 
@@ -23,7 +22,11 @@ public abstract class Inventory : MonoBehaviour
         _garbageFactory = garbageFactory;
     }
 
+    public int GetMaxAmount() => maxAmount;
+
     public int GetCount() => _items.Count;
+
+    public bool IsFull() => _items.Count == maxAmount;
 
     public InventoryItem GetItem()
     {
@@ -31,7 +34,7 @@ public abstract class Inventory : MonoBehaviour
         return _items[^1];
     }
 
-    public bool TryTransferTo(Inventory inventory)
+    public void TryTransferTo(Inventory inventory)
     {
         var item = GetItem();
         if (inventory.CanAddItem(item))
@@ -40,11 +43,7 @@ public abstract class Inventory : MonoBehaviour
             {
                 RemoveItem(_items[^1]);
             }
-
-            return true;
         }
-
-        return false;
     }
 
     public bool TryAddItem(InventoryItem item)
@@ -75,7 +74,7 @@ public abstract class Inventory : MonoBehaviour
 
             return true;
         }
-        
+
         return IgnoreCapacity(item);
     }
 

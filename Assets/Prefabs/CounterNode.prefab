@@ -1339,7 +1339,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1063f8e72e7548b397403aa5472ef070, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxAmount: 5
+  maxAmount: 50
 --- !u!208 &5727092714254123409
 NavMeshObstacle:
   m_ObjectHideFlags: 0
@@ -1350,7 +1350,7 @@ NavMeshObstacle:
   m_Enabled: 1
   serializedVersion: 3
   m_Shape: 1
-  m_Extents: {x: 0.5, y: 0.5, z: 0.5}
+  m_Extents: {x: 0.175, y: 0.175, z: 0.075}
   m_MoveThreshold: 0.1
   m_Carve: 1
   m_CarveOnlyStationary: 1

@@ -1,32 +1,31 @@
 ﻿using System.Collections.Generic;
-using UnityEditor;
+using System.Diagnostics;
 using UnityEngine;
 
 namespace Tables
 {
     public class Table : MonoBehaviour
     {
-        [SerializeField] private List<Seat> _seats;
-
+        [SerializeField] private List<Seat> seats;
+        
+        [Conditional("UNITY_EDITOR")]
         public void FindSeats()
         {
-            _seats = new();
+            seats = new();
             for (int i = 0; i < transform.childCount; i++)
             {
                 if (transform.GetChild(i).TryGetComponent(out Seat seat))
                 {
-                    _seats.Add(seat);
+                    seats.Add(seat);
                 }
             }
-
-            PrefabUtility.SavePrefabAsset(gameObject);
         }
 
         public bool HasFreeSeat()
         {
-            for (int i = 0; i < _seats.Count; i++)
+            for (int i = 0; i < seats.Count; i++)
             {
-                if (_seats[i].GetStatus())
+                if (seats[i].GetStatus())
                 {
                     continue;
                 }
@@ -39,16 +38,16 @@ namespace Tables
 
         public Seat GetFreeSeat()
         {
-            for (int i = 0; i < _seats.Count; i++)
+            for (int i = 0; i < seats.Count; i++)
             {
-                if (_seats[i].GetStatus())
+                if (seats[i].GetStatus())
                 {
                     continue;
                 }
 
-                _seats[i].SetStatus(true);
+                seats[i].SetStatus(true);
                 print($"GET FREE SEAT {i}");
-                return _seats[i];
+                return seats[i];
             }
 
             return null;

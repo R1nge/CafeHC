@@ -14,7 +14,7 @@ public class Counter : MonoBehaviour
         _inventory.OnItemRemovedEvent += DeSpawn;
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerStay(Collider other)
     {
         if (other.TryGetComponent(out PlayerInventory playerInventory))
         {

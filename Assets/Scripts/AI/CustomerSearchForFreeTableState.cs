@@ -16,12 +16,13 @@ namespace AI
             _waypoints = waypoints;
         }
 
+        //TODO: redo
         public void Enter()
         {
             if (_tableManager.GetFreeTable() == null) return;
             if (!_tableManager.GetFreeTable().HasFreeSeat()) return;
-            _customerMovement.MoveTo(_tableManager.GetFreeTable().GetFreeSeat().GetPosition());
             _waypoints.RemoveCustomer();
+            _customerMovement.MoveTo(_tableManager.GetFreeTable().GetFreeSeat().GetPosition());
             Debug.Log("FOUND FREE TABLE");
         }
 

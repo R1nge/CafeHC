@@ -4,13 +4,13 @@ namespace AI
 {
     public class CustomerInQueueState : IState
     {
-        private readonly CustomerStateManager _stateManager;
+        private readonly CustomerStateManager _customerStateManager;
         private readonly CustomerMovement _movement;
         private readonly Waypoints _waypoints;
 
-        public CustomerInQueueState(CustomerStateManager stateManager, CustomerMovement movement, Waypoints waypoints)
+        public CustomerInQueueState(CustomerStateManager customerStateManager, CustomerMovement movement, Waypoints waypoints)
         {
-            _stateManager = stateManager;
+            _customerStateManager = customerStateManager;
             _movement = movement;
             _waypoints = waypoints;
         }
@@ -34,7 +34,7 @@ namespace AI
         {
             if (other.TryGetComponent(out Counter counter))
             {
-                _stateManager.SetCustomerAtCounter();
+                _customerStateManager.SetCustomerOrderState();
             }
         }
     }
