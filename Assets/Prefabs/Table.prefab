@@ -444,7 +444,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 2147483647
+  m_StaticEditorFlags: 119
   m_IsActive: 1
 --- !u!4 &3653721316574378954
 Transform:
@@ -627,7 +627,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 2147483647
+  m_StaticEditorFlags: 119
   m_IsActive: 1
 --- !u!4 &421313388947181564
 Transform:
@@ -721,12 +721,13 @@ GameObject:
   - component: {fileID: 7643943723913345264}
   - component: {fileID: 7643943723913345270}
   - component: {fileID: 7643943723913345271}
+  - component: {fileID: 184319687742241910}
   m_Layer: 6
   m_Name: Table
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 2147483647
+  m_StaticEditorFlags: 119
   m_IsActive: 1
 --- !u!4 &6312702948489964241
 Transform:
@@ -832,4 +833,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5fee73b87fa4f5c80fadcda8a0aa151, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxAmount: 5
+  maxAmount: 20
+--- !u!114 &184319687742241910
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9016430598629770414}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3e7486225fe04eb2abb6c4a8533e1065, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  eatInterval: 2
+  garbage: {fileID: 6963181051485640254}
+  moneyArea: {fileID: 0}

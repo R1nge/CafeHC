@@ -57,7 +57,7 @@ public class CoffeeMachine : MonoBehaviour
         return position;
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerStay(Collider other)
     {
         if (other.TryGetComponent(out Inventory inventory))
         {

@@ -21,11 +21,20 @@ namespace Tables
             }
         }
 
+        public void FreeUp()
+        {
+            for (int i = 0; i < seats.Count; i++)
+            {
+                seats[i].GetCustomer().SetCustomerGoHome();
+                seats[i].SetCustomer(null);
+            }
+        }
+
         public bool HasFreeSeat()
         {
             for (int i = 0; i < seats.Count; i++)
             {
-                if (seats[i].GetStatus())
+                if (seats[i].GetCustomer())
                 {
                     continue;
                 }
@@ -40,13 +49,11 @@ namespace Tables
         {
             for (int i = 0; i < seats.Count; i++)
             {
-                if (seats[i].GetStatus())
+                if (seats[i].GetCustomer())
                 {
                     continue;
                 }
-
-                seats[i].SetStatus(true);
-                print($"GET FREE SEAT {i}");
+                
                 return seats[i];
             }
 

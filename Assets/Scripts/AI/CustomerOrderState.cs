@@ -4,17 +4,16 @@ namespace AI
 {
     public class CustomerOrderState : IState
     {
-        private readonly Inventory _inventory;
         private readonly CustomerInventoryUI _customerInventoryUI;
 
-        public CustomerOrderState( Inventory inventory, CustomerInventoryUI inventoryUI)
+        public CustomerOrderState(CustomerInventoryUI inventoryUI)
         {
-            _inventory = inventory;
             _customerInventoryUI = inventoryUI;
         }
 
         public void Enter()
         {
+            _customerInventoryUI.UpdateUI();
         }
 
         public void Exit()
@@ -23,7 +22,6 @@ namespace AI
 
         public void Update()
         {
-            _customerInventoryUI.UpdateUI(_inventory.GetMaxAmount() - _inventory.GetCount());
         }
 
         public void OnTriggerEnter(Collider other)
