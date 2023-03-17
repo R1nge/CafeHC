@@ -2,11 +2,11 @@
 
 namespace AI
 {
-    public class CustomerOrderState : IState
+    public class CustomerMakeOrderState : IState
     {
         private readonly CustomerInventoryUI _customerInventoryUI;
 
-        public CustomerOrderState(CustomerInventoryUI inventoryUI)
+        public CustomerMakeOrderState(CustomerInventoryUI inventoryUI)
         {
             _customerInventoryUI = inventoryUI;
         }
@@ -25,6 +25,10 @@ namespace AI
         }
 
         public void OnTriggerEnter(Collider other)
+        {
+        }
+
+        public void OnTriggerStay(Collider other)
         {
         }
     }

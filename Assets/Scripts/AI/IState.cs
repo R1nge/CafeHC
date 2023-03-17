@@ -8,5 +8,7 @@ namespace AI
         void Exit();
         void Update();
         void OnTriggerEnter(Collider other);
+
+        void OnTriggerStay(Collider other);
     }
 }

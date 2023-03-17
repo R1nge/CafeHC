@@ -37,5 +37,9 @@ namespace AI
                 _customerStateManager.SetCustomerOrderState();
             }
         }
+
+        public void OnTriggerStay(Collider other)
+        {
+        }
     }
 }

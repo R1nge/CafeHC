@@ -13,6 +13,7 @@ namespace AI
         private CustomerInventoryUI _inventoryUI;
         private Waypoints _waypoints;
         private TableManager _tableManager;
+        private CustomerInventory _customerInventory;
 
         private void Awake()
         {
@@ -30,12 +31,14 @@ namespace AI
             _waypoints = FindObjectOfType<Waypoints>();
             _tableManager = FindObjectOfType<TableManager>();
             _inventoryUI = GetComponent<CustomerInventoryUI>();
+            _customerInventory = GetComponent<CustomerInventory>();
 
             _states = new Dictionary<Type, IState>
             {
                 [typeof(CustomerInQueueState)] = new CustomerInQueueState(this, _customerMovement, _waypoints),
-                [typeof(CustomerOrderState)] = new CustomerOrderState(_inventoryUI),
-                [typeof(CustomerSearchForFreeTableState)] = new CustomerSearchForFreeTableState(_tableManager, _customerMovement, _waypoints),
+                [typeof(CustomerMakeOrderState)] = new CustomerMakeOrderState(_inventoryUI),
+                [typeof(CustomerSearchForFreeTableState)] = new CustomerSearchForFreeTableState(this, _tableManager, _customerMovement, _waypoints),
+                [typeof(CustomerPlaceOrderState)] = new CustomerPlaceOrderState(this, _customerInventory),
                 [typeof(CustomerGoHomeState)] = new CustomerGoHomeState(_customerMovement, _waypoints.GetHome())
             };
         }
@@ -47,7 +50,7 @@ namespace AI
 
         public void SetCustomerOrderState()
         {
-            SetState(GetState<CustomerOrderState>());
+            SetState(GetState<CustomerMakeOrderState>());
         }
 
         public void SetCustomerSearchForFreeTable()
@@ -58,6 +61,11 @@ namespace AI
         public void SetCustomerGoHome()
         {
             SetState(GetState<CustomerGoHomeState>());
+        }
+
+        public void SetCustomerPlaceOrder()
+        {
+            SetState(GetState<CustomerPlaceOrderState>());
         }
 
         private void SetState(IState newState)
@@ -86,6 +94,11 @@ namespace AI
         private void OnTriggerEnter(Collider other)
         {
             _currentState?.OnTriggerEnter(other);
+        }
+
+        private void OnTriggerStay(Collider other)
+        {
+            _currentState?.OnTriggerStay(other);
         }
     }
 }

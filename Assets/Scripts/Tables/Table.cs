@@ -159,20 +159,7 @@ namespace Tables
 
         private void OnTriggerEnter(Collider other)
         {
-            if (other.TryGetComponent(out CustomerInventory customerInventory))
-            {
-                if (customerInventory.TryGetComponent(out CustomerStateManager customerStateManager))
-                {
-                    if (!HasFreeSeat()) return;
-                    GetFreeSeat().SetCustomer(customerStateManager);
-                    var count = customerInventory.GetCount();
-                    for (int i = count - 1; i >= 0; i--)
-                    {
-                        customerInventory.TryTransferTo(_inventory);
-                    }
-                }
-            }
-            else if (other.TryGetComponent(out PlayerInventory playerInventory))
+            if (other.TryGetComponent(out PlayerInventory playerInventory))
             {
                 if (garbage.activeInHierarchy)
                 {

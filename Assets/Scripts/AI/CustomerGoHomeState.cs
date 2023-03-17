@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using UnityEngine.AI;
 
 namespace AI
 {
@@ -28,6 +27,10 @@ namespace AI
         }
 
         public void OnTriggerEnter(Collider other)
+        {
+        }
+
+        public void OnTriggerStay(Collider other)
         {
         }
     }
