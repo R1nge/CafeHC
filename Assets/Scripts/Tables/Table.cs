@@ -136,6 +136,7 @@ namespace Tables
             for (int i = 0; i < seats.Count; i++)
             {
                 seats[i].GetCustomer().SetCustomerGoHome();
+                //seats[i].GetCustomer().SetCustomerInQueue();
                 seats[i].SetCustomer(null);
             }
         }
