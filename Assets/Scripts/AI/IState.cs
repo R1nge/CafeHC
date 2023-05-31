@@ -2,6 +2,7 @@
 
 namespace AI
 {
+    //TODO: use a base class instead of interface???
     public interface IState
     {
         void Enter();

@@ -74,9 +74,10 @@ GameObject:
   - component: {fileID: 3139719419244321599}
   - component: {fileID: 5569413736639412759}
   - component: {fileID: 3461769933695061280}
-  - component: {fileID: 4231311380271167481}
+  - component: {fileID: 382107362867778307}
   - component: {fileID: 2367018194914525572}
   - component: {fileID: 1122894674503776178}
+  - component: {fileID: 1183308755575504756}
   m_Layer: 8
   m_Name: Player
   m_TagString: Untagged
@@ -130,7 +131,7 @@ Rigidbody:
   m_Interpolate: 1
   m_Constraints: 80
   m_CollisionDetection: 0
---- !u!114 &4231311380271167481
+--- !u!114 &382107362867778307
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -139,11 +140,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 2367018194914525573}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 22296ef50bf14fc595a47f1f5d094ec2, type: 3}
+  m_Script: {fileID: 11500000, guid: 67064ce33f244dfe883dd4fd7c7028e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hand: {fileID: 6580006625717238768}
-  offsetY: 0.5
 --- !u!114 &2367018194914525572
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -170,7 +169,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 22dea64735554b108c6212aa474d861b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxAmount: 5
+  size: 5
+--- !u!114 &1183308755575504756
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2367018194914525573}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7d8e9596a0204e85ba3f3640bc351e8a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hand: {fileID: 6580006625717238768}
+  offsetY: 0.5
 --- !u!1 &4227338472347048651
 GameObject:
   m_ObjectHideFlags: 0
@@ -282,6 +295,10 @@ PrefabInstance:
     - target: {fileID: 501667358040031674, guid: 64cb9e500360010469f4e4c331ac0e1b, type: 3}
       propertyPath: m_Layer
       value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 901420531405213170, guid: 64cb9e500360010469f4e4c331ac0e1b, type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1297188600265592958, guid: 64cb9e500360010469f4e4c331ac0e1b, type: 3}
       propertyPath: m_Layer

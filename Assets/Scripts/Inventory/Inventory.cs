@@ -5,28 +5,27 @@ using Zenject;
 
 public abstract class Inventory : MonoBehaviour
 {
-    [SerializeField] private int maxAmount = 5;
+    [SerializeField] private int size = 5;
+    protected Dictionary<InventoryItemType, InventoryItem> AllowedItems = new();
+    protected ItemManager ItemManager;
     private readonly List<InventoryItem> _items = new();
-    private CoffeeFactory _coffeeFactory;
-    private GarbageFactory _garbageFactory;
 
     public event Action<InventoryItem> OnItemAddedEvent;
     public event Action<InventoryItem> OnItemRemovedEvent;
     public event Action<InventoryItem> OnAllItemsRemovedEvent;
-    public event Action<int> OnMaxAmountChangedEvent;
+    public event Action<int> OnSizeChangedEvent;
 
     [Inject]
-    private void Construct(CoffeeFactory coffeeFactory, GarbageFactory garbageFactory)
+    protected void Inject(ItemManager itemManager)
     {
-        _coffeeFactory = coffeeFactory;
-        _garbageFactory = garbageFactory;
+        ItemManager = itemManager;
     }
 
-    public int GetMaxAmount() => maxAmount;
+    public int GetMaxAmount() => size;
 
     public int GetCount() => _items.Count;
 
-    public bool IsFull() => _items.Count == maxAmount;
+    public bool IsFull() => _items.Count == size;
 
     public InventoryItem GetItem()
     {
@@ -36,13 +35,9 @@ public abstract class Inventory : MonoBehaviour
 
     public void TryTransferTo(Inventory inventory)
     {
-        var item = GetItem();
-        if (inventory.CanAddItem(item))
+        if (inventory.TryAddItem(GetItem()))
         {
-            if (inventory.TryAddItem(item))
-            {
-                RemoveItem(_items[^1]);
-            }
+            RemoveItem(_items[^1]);
         }
     }
 
@@ -65,14 +60,17 @@ public abstract class Inventory : MonoBehaviour
             return false;
         }
 
-        if (_items.Count < maxAmount)
+        if (AllowedItems.ContainsKey(item.ItemType()))
         {
-            if (_items.Count != 0)
+            if (_items.Count < size)
             {
-                return _items[^1].GetType() == item.GetType();
-            }
+                if (_items.Count != 0)
+                {
+                    return _items[^1].ItemType() == item.ItemType();
+                }
 
-            return true;
+                return true;
+            }
         }
 
         return IgnoreCapacity(item);
@@ -91,45 +89,14 @@ public abstract class Inventory : MonoBehaviour
         _items.Clear();
     }
 
-    public void SetMaxAmount(int maxAmount)
+    public void SetSize(int size)
     {
-        this.maxAmount = maxAmount;
-        OnMaxAmountChangedEvent?.Invoke(this.maxAmount);
+        this.size = size;
+        OnSizeChangedEvent?.Invoke(this.size);
     }
 
     private bool IgnoreCapacity(InventoryItem item)
     {
-        if (item.CompareType(InventoryItem.ItemType.Garbage))
-        {
-            return true;
-        }
-
-        return false;
-    }
-
-    public void GetFromPool(InventoryItem item, Vector3 position, Quaternion rotation, Transform parent)
-    {
-        switch (item.itemType)
-        {
-            case InventoryItem.ItemType.Coffee:
-                _coffeeFactory.GetFromPool(position, rotation, parent);
-                break;
-            case InventoryItem.ItemType.Garbage:
-                _garbageFactory.GetFromPool(position, rotation, parent);
-                break;
-        }
-    }
-
-    public void ReturnToPool(InventoryItem item, GameObject go)
-    {
-        switch (item.itemType)
-        {
-            case InventoryItem.ItemType.Coffee:
-                _coffeeFactory.ReturnToPool(go);
-                break;
-            case InventoryItem.ItemType.Garbage:
-                _garbageFactory.ReturnToPool(go);
-                break;
-        }
+        return item.IgnoreCapacity();
     }
 }

@@ -1219,9 +1219,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8390018615475857908}
-  - component: {fileID: 2257114776992361664}
-  - component: {fileID: 2257114776992361665}
   - component: {fileID: 2257114776992361666}
+  - component: {fileID: 2257114776992361664}
+  - component: {fileID: 59939097893465327}
+  - component: {fileID: 8071009886171629517}
   m_Layer: 6
   m_Name: CoffeeMachineNode1
   m_TagString: Untagged
@@ -1248,35 +1249,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2257114776992361664
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2257114776992361679}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 78d28d227d824e00afcfa9b73466c4ba, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  delay: 2
-  spawnPoint: {fileID: 6263800515265236710}
-  offsetX: 0.5
-  offsetY: 0.5
---- !u!114 &2257114776992361665
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2257114776992361679}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 354a6354fefa4ca0b59dcc9f58c2ab01, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxAmount: 6
 --- !u!65 &2257114776992361666
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1290,6 +1262,47 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.1596756, y: 0.10236418, z: 0.13734007}
   m_Center: {x: -0.0010585785, y: 0.048817903, z: -0.16764712}
+--- !u!114 &2257114776992361664
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2257114776992361679}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 78d28d227d824e00afcfa9b73466c4ba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  delay: 2
+--- !u!114 &59939097893465327
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2257114776992361679}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 354a6354fefa4ca0b59dcc9f58c2ab01, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  size: 6
+--- !u!114 &8071009886171629517
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2257114776992361679}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1d34aa81471e4b9d91fa8c50bb5b3fa3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  offsetX: 0.5
+  offsetY: 0.5
+  spawnPoint: {fileID: 6263800515265236710}
 --- !u!1 &2404014008048640688
 GameObject:
   m_ObjectHideFlags: 0

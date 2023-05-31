@@ -325,11 +325,10 @@ GameObject:
   - component: {fileID: 8991884121833258746}
   - component: {fileID: 7304476155033326271}
   - component: {fileID: 1614633061675466231}
-  - component: {fileID: 3833661413780714414}
   - component: {fileID: 8964414046908424356}
-  - component: {fileID: 7304476155033326268}
+  - component: {fileID: 3833661413780714414}
   - component: {fileID: 7304476155033326265}
-  - component: {fileID: 7107354109528824}
+  - component: {fileID: 8470057630416201296}
   - component: {fileID: 8591159356771811170}
   m_Layer: 7
   m_Name: Customer
@@ -406,18 +405,6 @@ NavMeshAgent:
   m_BaseOffset: 0.5
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 0
---- !u!114 &3833661413780714414
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7304476155033326259}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 82dc265c8c0d4d939e76dc1687b0377f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &8964414046908424356
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -430,7 +417,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93828be1a89a43acbfd03a14f3c6677a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &7304476155033326268
+--- !u!114 &3833661413780714414
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -439,7 +426,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 7304476155033326259}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dfbf08ba86944e31a786256aec3d1f1a, type: 3}
+  m_Script: {fileID: 11500000, guid: 82dc265c8c0d4d939e76dc1687b0377f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &7304476155033326265
@@ -454,8 +441,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c1aa153e3dc24ddf834e8d00252e1137, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxAmount: 5
---- !u!114 &7107354109528824
+  size: 5
+--- !u!114 &8470057630416201296
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -464,7 +451,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 7304476155033326259}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a9a45f36829642c88b5442dccd06f564, type: 3}
+  m_Script: {fileID: 11500000, guid: c39369811c10484fb9cb00e399ca2909, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &8591159356771811170

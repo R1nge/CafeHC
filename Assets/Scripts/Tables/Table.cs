@@ -7,18 +7,24 @@ using Zenject;
 
 namespace Tables
 {
+    [RequireComponent(typeof(TableInventory))]
     public class Table : MonoBehaviour
     {
         [SerializeField] private float eatInterval;
         [SerializeField] private GameObject garbage;
         [SerializeField] private MoneyArea moneyArea;
         [SerializeField] private List<Seat> seats;
-        private readonly GarbageItem _garbageItem = new();
         private Inventory _inventory;
-        private CoffeeFactory _coffeeFactory;
         private int _currentCount;
         private int _eatenCount;
         private YieldInstruction _coroutine;
+        private ItemManager _itemManager;
+
+        [Inject]
+        private void Construct(ItemManager itemManager)
+        {
+            _itemManager = itemManager;
+        }
 
         [Conditional("UNITY_EDITOR")]
         public void FindSeats()
@@ -63,45 +69,29 @@ namespace Tables
             return null;
         }
 
-        [Inject]
-        private void Construct(CoffeeFactory coffeeFactory) => _coffeeFactory = coffeeFactory;
-
         private void Awake()
         {
             _inventory = GetComponent<Inventory>();
-            _inventory.OnAllItemsRemovedEvent += OnAllItemsRemoved;
             _inventory.OnItemAddedEvent += OnItemAdded;
             _inventory.OnItemRemovedEvent += OnItemRemoved;
+            _inventory.OnAllItemsRemovedEvent += OnAllItemsRemoved;
         }
 
         private void OnItemAdded(InventoryItem item)
         {
-            var pos = new Vector3(
-                transform.position.x,
-                transform.position.y + 1f + 0.5f * _currentCount,
-                transform.position.z
-            );
-
-            _coffeeFactory.GetFromPool(pos, Quaternion.identity, transform);
-            _currentCount = _inventory.GetCount();
-
+            _currentCount++;
+            print(_currentCount);
             if (HasFreeSeat()) return;
             _coroutine ??= StartCoroutine(Eat_c());
         }
 
         private void OnAllItemsRemoved(InventoryItem item)
         {
-            for (int i = transform.childCount - 1; i >= 0; i--)
-            {
-                _coffeeFactory.ReturnToPool(transform.GetChild(i).gameObject);
-            }
-
             _currentCount = 0;
         }
 
         private void OnItemRemoved(InventoryItem item)
         {
-            _coffeeFactory.ReturnToPool(transform.GetChild(transform.childCount - 1).gameObject);
             _currentCount--;
             _eatenCount++;
             //moneyArea.AddMoney(Random.Range(5, 10));
@@ -113,7 +103,7 @@ namespace Tables
             {
                 if (_currentCount == 0)
                 {
-                    EnableTrash();
+                    garbage.SetActive(true);
                     FreeUpTable();
                     StopAllCoroutines();
                     _coroutine = null;
@@ -126,12 +116,7 @@ namespace Tables
             }
         }
 
-        private void EnableTrash()
-        {
-            garbage.SetActive(true);
-        }
-
-        private void FreeUp()
+        private void FreeUpTable()
         {
             for (int i = 0; i < seats.Count; i++)
             {
@@ -143,19 +128,13 @@ namespace Tables
 
         private void Clean(PlayerInventory inventory)
         {
-            if(!inventory.TryAddItem(_garbageItem)) return;
             for (int i = 0; i < _eatenCount; i++)
             {
-                inventory.TryAddItem(_garbageItem);
+                inventory.TryAddItem(_itemManager.GetItem(InventoryItemType.Garbage));
             }
 
             _eatenCount = 0;
             garbage.SetActive(false);
-        }
-
-        private void FreeUpTable()
-        {
-            FreeUp();
         }
 
         private void OnTriggerEnter(Collider other)

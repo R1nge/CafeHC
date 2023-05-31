@@ -341,6 +341,7 @@ GameObject:
   - component: {fileID: 7643943723913345270}
   - component: {fileID: 7643943723913345271}
   - component: {fileID: 184319687742241910}
+  - component: {fileID: 4120766543233893680}
   m_Layer: 6
   m_Name: Table
   m_TagString: Untagged
@@ -457,7 +458,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5fee73b87fa4f5c80fadcda8a0aa151, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxAmount: 20
+  size: 1000
 --- !u!114 &184319687742241910
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -476,6 +477,18 @@ MonoBehaviour:
   seats:
   - {fileID: 301809698865369045}
   - {fileID: 5371717225776429141}
+--- !u!114 &4120766543233893680
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5553787332852285468}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eebb16cb26d64e848f7b5efd508f722c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6990232739972597290
 GameObject:
   m_ObjectHideFlags: 0
