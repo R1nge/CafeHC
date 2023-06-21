@@ -7,10 +7,10 @@ public class MoneyArea : MonoBehaviour
     [SerializeField] private int moneyPerBanknote;
     [SerializeField] private GameObject[] banknotes;
     private int _currentShownAmount;
-    private Wallet _wallet;
+    private Wallet.Wallet _wallet;
 
     [Inject]
-    private void Construct(Wallet wallet) => _wallet = wallet;
+    private void Construct(Wallet.Wallet wallet) => _wallet = wallet;
 
     public void AddMoney(int amount)
     {

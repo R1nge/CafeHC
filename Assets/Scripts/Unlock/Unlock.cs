@@ -8,11 +8,11 @@ public class Unlock : MonoBehaviour
     [SerializeField] private GameObject[] gameObjects;
     private int _currentLevel;
     private int _moneyLeftToTheNextLevel;
-    private Wallet _wallet;
+    private Wallet.Wallet _wallet;
     private UnlockUI _unlockUI;
 
     [Inject]
-    private void Construct(Wallet wallet)
+    private void Construct(Wallet.Wallet wallet)
     {
         _wallet = wallet;
     }

@@ -1,61 +1,59 @@
 ﻿using System;
 using UnityEngine;
 
-public class Wallet : MonoBehaviour
+namespace Wallet
 {
-    private int _money;
-    private const string MoneyString = "Money";
-
-    private int Money
+    public sealed class Wallet
     {
-        get => _money;
+        private int _money;
+        private const string MoneyString = "Money";
 
-        set
+        private int Money
         {
-            _money = value;
-            OnMoneyAmountChanged?.Invoke(_money);
-        }
-    }
-
-    public event Action<int> OnMoneyAmountChanged;
-
-    private void Start() => Load();
-
-    public void Earn(int amount)
-    {
-        if (amount < 0)
-        {
-            Debug.LogWarning("Trying to earn negative value");
-            return;
+            get => _money;
+            set
+            {
+                _money = value;
+                OnMoneyAmountChanged?.Invoke(_money);
+            }
         }
 
-        Money += amount;
-    }
+        public event Action<int> OnMoneyAmountChanged;
 
-    public bool Spend(int amount)
-    {
-        if (amount < 0)
+        public void Earn(int amount)
         {
-            Debug.LogWarning("Trying to spend negative value");
+            if (amount < 0)
+            {
+                Debug.LogWarning("Trying to earn negative value");
+                return;
+            }
+
+            Money += amount;
+        }
+
+        public bool Spend(int amount)
+        {
+            if (amount < 0)
+            {
+                Debug.LogWarning("Trying to spend negative value");
+                return false;
+            }
+
+            if (Money - amount >= 0)
+            {
+                Money -= amount;
+                return true;
+            }
+
             return false;
         }
 
-        if (Money - amount >= 0)
+        public void Save()
         {
-            Money -= amount;
-            return true;
+            PlayerPrefs.SetInt(nameof(MoneyString), Money);
+            PlayerPrefs.Save();
         }
 
-        return false;
+        public void Load() => Money = PlayerPrefs.GetInt(nameof(MoneyString), 0);
     }
-
-    private void Save()
-    {
-        PlayerPrefs.SetInt(nameof(MoneyString), Money);
-        PlayerPrefs.Save();
-    }
-
-    private void Load() => Money = PlayerPrefs.GetInt(nameof(MoneyString), 0);
-
-    private void OnDestroy() => Save();
 }

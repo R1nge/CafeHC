@@ -5,10 +5,10 @@ using Zenject;
 public class WalletUIManager : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI moneyText;
-    private Wallet _wallet;
+    private Wallet.Wallet _wallet;
 
     [Inject]
-    public void Construct(Wallet wallet) => _wallet = wallet;
+    public void Construct(Wallet.Wallet wallet) => _wallet = wallet;
 
     private void Awake() => _wallet.OnMoneyAmountChanged += UpdateUI;
 
