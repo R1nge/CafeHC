@@ -11,7 +11,6 @@ namespace DI
         [SerializeField] private Transform joystickParent;
         [SerializeField] private Player.Player player;
         [SerializeField] private Transform spawnPoint;
-        [SerializeField] private EntryPoint entryPoint;
 
         public override void InstallBindings()
         {
@@ -75,9 +74,7 @@ namespace DI
 
         private void BindEntryPoint()
         {
-            var entryPointInstance = Container.InstantiatePrefabForComponent<EntryPoint>(entryPoint);
-            Container.Bind<EntryPoint>().FromInstance(entryPointInstance).AsSingle();
-            Container.QueueForInject(entryPointInstance);
+            Container.BindInterfacesTo<EntryPoint>().FromNew().AsSingle();
         }
     }
 }

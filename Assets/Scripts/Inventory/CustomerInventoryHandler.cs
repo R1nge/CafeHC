@@ -8,7 +8,6 @@ public class CustomerInventoryHandler : InventoryHandler
     protected override void Awake()
     {
         base.Awake();
-        Inventory.SetSize(Random.Range(5, 10));
         _stateManager = GetComponent<CustomerStateManager>();
     }
 
@@ -18,7 +17,7 @@ public class CustomerInventoryHandler : InventoryHandler
         
         if (Inventory.IsFull())
         {
-            _stateManager.SetCustomerSearchForFreeTable();
+            _stateManager.SearchForFreeTable();
         }
     }
 

@@ -1,7 +1,7 @@
-﻿using UnityEngine;
+﻿using System;
 using Zenject;
 
-public class EntryPoint : MonoBehaviour
+public class EntryPoint : IInitializable, IDisposable
 {
     private Wallet.Wallet _wallet;
     private ItemManager _itemManager;
@@ -15,14 +15,14 @@ public class EntryPoint : MonoBehaviour
         _player = player;
     }
 
-    private void Start()
+    public void Initialize()
     {
         _wallet.Load();
         _itemManager.Initialize();
         _player.GetComponent<PlayerInventory>().Initialize();
     }
 
-    private void OnDestroy()
+    public void Dispose()
     {
         _wallet.Save();
     }

@@ -1,4 +1,6 @@
-﻿public class CustomerInventory : Inventory
+﻿using UnityEngine;
+
+public class CustomerInventory : Inventory
 {
     private void Start()
     {

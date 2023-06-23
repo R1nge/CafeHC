@@ -6,6 +6,7 @@ using Zenject;
 public abstract class Inventory : MonoBehaviour
 {
     [SerializeField] private int size = 5;
+    //TODO: think of a better solution
     protected Dictionary<InventoryItemType, InventoryItem> AllowedItems = new();
     protected ItemManager ItemManager;
     private readonly List<InventoryItem> _items = new();
@@ -53,7 +54,7 @@ public abstract class Inventory : MonoBehaviour
         return false;
     }
 
-    private bool CanAddItem(InventoryItem item)
+    public bool CanAddItem(InventoryItem item)
     {
         if (item == null)
         {
@@ -62,18 +63,20 @@ public abstract class Inventory : MonoBehaviour
 
         if (AllowedItems.ContainsKey(item.ItemType()))
         {
-            if (_items.Count < size)
+            if (_items.Count == 0)
             {
-                if (_items.Count != 0)
-                {
-                    return _items[^1].ItemType() == item.ItemType();
-                }
-
                 return true;
             }
+
+            if (_items.Count < size)
+            {
+                return _items[0].ItemType() == item.ItemType();
+            }
+
+            return IgnoreCapacity(item);
         }
 
-        return IgnoreCapacity(item);
+        return false;
     }
 
     public void RemoveItem(InventoryItem item)

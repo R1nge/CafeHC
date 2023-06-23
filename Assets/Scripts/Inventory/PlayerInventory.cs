@@ -6,9 +6,11 @@ public class PlayerInventory : Inventory
     public void Initialize()
     {
         var coffee = ItemManager.GetItem(InventoryItemType.Coffee);
-        AllowedItems = new(1)
+        var garbage = ItemManager.GetItem(InventoryItemType.Garbage);
+        AllowedItems = new(2)
         {
-            { coffee.ItemType(), coffee }
+            { coffee.ItemType(), coffee },
+            { garbage.ItemType(), garbage }
         };
     }
 }

@@ -8,8 +8,6 @@ namespace AI
     {
         private NavMeshAgent _navMeshAgent;
         private int _currentIndex;
-
-        //TODO: inject
         private Waypoints _waypoints;
 
         private void Awake()
@@ -20,14 +18,10 @@ namespace AI
             _waypoints.AddCustomer(this);
         }
 
-        public void MoveToNextWaypoint()
-        {
-            MoveTo(_waypoints.GetWaypoints()[_currentIndex--].position);
-        }
+        public void MoveToNextWaypoint() => MoveTo(_waypoints.GetWaypoints()[_currentIndex--].position);
 
-        public void MoveTo(Vector3 position)
-        {
-            _navMeshAgent.SetDestination(position);
-        }
+        public void RemoveFromQueue() => _waypoints.RemoveCustomer();
+
+        public void MoveTo(Vector3 position) => _navMeshAgent.SetDestination(position);
     }
 }

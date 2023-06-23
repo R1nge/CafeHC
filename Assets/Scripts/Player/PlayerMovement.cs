@@ -8,23 +8,23 @@ namespace Player
         [SerializeField] private float movementSpeed;
         [SerializeField] private float rotationSpeed;
         private FloatingJoystick _floatingJoystick;
-        private Rigidbody _rigidbody;
+        private CharacterController _characterController;
         private Vector3 _movementDirection;
 
         [Inject]
         private void Construct(FloatingJoystick floatingJoystick) => _floatingJoystick = floatingJoystick;
 
-        private void Awake() => _rigidbody = GetComponent<Rigidbody>();
+        private void Awake() => _characterController = GetComponent<CharacterController>();
 
-        private void FixedUpdate() => Move();
+        private void Update() => Move();
 
         private void Move()
         {
-            _movementDirection = new Vector3(
+            _movementDirection = new(
                 _floatingJoystick.Horizontal * movementSpeed,
                 0,
                 _floatingJoystick.Vertical * movementSpeed
-            ) * Time.deltaTime;
+            );
 
             if (_floatingJoystick.Horizontal != 0 || _floatingJoystick.Vertical != 0)
             {
@@ -32,16 +32,16 @@ namespace Player
                 //TODO: Play anim
             }
 
-            _rigidbody.MovePosition(_rigidbody.position + _movementDirection);
+            _characterController.Move(_movementDirection * Time.deltaTime);
         }
 
         private void Rotate()
         {
             var direction =
                 Vector3.RotateTowards(
-                    transform.forward, 
+                    transform.forward,
                     _movementDirection,
-                    rotationSpeed * Time.deltaTime, 
+                    rotationSpeed * Time.deltaTime,
                     0
                 );
 

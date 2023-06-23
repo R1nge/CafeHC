@@ -2480,7 +2480,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a23fe114e974e32aeda77e9a2394caa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  entryPoint: {fileID: 6021144587224202053, guid: ffe062e3f97bc2f4ea6aca0fbd83aff9, type: 3}
   coffeeFactory: {fileID: 307096405606690977, guid: f4d9670eb164cd64bb7197c1f82a61ac, type: 3}
   garbageFactory: {fileID: 2020804516022085643, guid: f065e8ddf430c9b4daff79ad7f624b3d, type: 3}
   floatingJoystick: {fileID: 4068647606612178240, guid: e4bf80fb2b9fc9b45ab9a4765787ee66, type: 3}

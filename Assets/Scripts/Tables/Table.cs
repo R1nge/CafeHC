@@ -1,7 +1,7 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
-using AI;
 using UnityEngine;
 using Zenject;
 
@@ -19,6 +19,8 @@ namespace Tables
         private int _eatenCount;
         private YieldInstruction _coroutine;
         private ItemManager _itemManager;
+
+        public event Action<Table> OnFreeUpEvent;
 
         [Inject]
         private void Construct(ItemManager itemManager)
@@ -39,21 +41,6 @@ namespace Tables
             }
         }
 
-        public bool HasFreeSeat()
-        {
-            for (int i = 0; i < seats.Count; i++)
-            {
-                if (seats[i].GetCustomer() || garbage.activeInHierarchy)
-                {
-                    continue;
-                }
-
-                return true;
-            }
-
-            return false;
-        }
-
         public Seat GetFreeSeat()
         {
             for (int i = 0; i < seats.Count; i++)
@@ -69,6 +56,26 @@ namespace Tables
             return null;
         }
 
+        public int GetFreeSeatsAmount()
+        {
+            if (garbage.activeInHierarchy)
+            {
+                return 0;
+            }
+
+            int amount = seats.Count;
+
+            for (int i = 0; i < seats.Count; i++)
+            {
+                if (seats[i].GetCustomer() != null)
+                {
+                    amount -= 1;
+                }
+            }
+
+            return amount;
+        }
+
         private void Awake()
         {
             _inventory = GetComponent<Inventory>();
@@ -80,8 +87,7 @@ namespace Tables
         private void OnItemAdded(InventoryItem item)
         {
             _currentCount++;
-            print(_currentCount);
-            if (HasFreeSeat()) return;
+            if (GetFreeSeat()) return;
             _coroutine ??= StartCoroutine(Eat_c());
         }
 
@@ -120,14 +126,18 @@ namespace Tables
         {
             for (int i = 0; i < seats.Count; i++)
             {
-                seats[i].GetCustomer().SetCustomerGoHome();
-                //seats[i].GetCustomer().SetCustomerInQueue();
+                seats[i].GetCustomer().GoHome();
                 seats[i].SetCustomer(null);
             }
         }
 
         private void Clean(PlayerInventory inventory)
         {
+            if (!inventory.CanAddItem(_itemManager.GetItem(InventoryItemType.Garbage)))
+            {
+                return;
+            }
+
             for (int i = 0; i < _eatenCount; i++)
             {
                 inventory.TryAddItem(_itemManager.GetItem(InventoryItemType.Garbage));
@@ -135,6 +145,7 @@ namespace Tables
 
             _eatenCount = 0;
             garbage.SetActive(false);
+            OnFreeUpEvent?.Invoke(this);
         }
 
         private void OnTriggerEnter(Collider other)
